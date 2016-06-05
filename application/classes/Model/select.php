@@ -3,15 +3,22 @@
 class Model_Select extends Model
 {
 
-    public function variable($search)
+    public function variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate)
     {
         $query = DB::select()
             ->from("projects")
             ->where('id_projects', '>=', '0');
         if ($search != 'false') { $query = $query->and_where('title', 'LIKE', '%'.$search.'%'); };
+        if ($full_name != 'false') { $query = $query->and_where('full_name', 'LIKE', '%'.$full_name.'%'); };
+        if ($spec != 'false') { $query = $query->and_where('cipher'== $spec); };
+        if ($group != 'false') { $query = $query->and_where('id_group'== $group); };
+        if ($view != 'false') { $query = $query->and_where('id_view'== $view); };
+        if ($manager != 'false') { $query = $query->and_where('id_manager'== $manager); };
+        if ($sdate != 'false') { $query = $query->and_where('date_add'>= $sdate); };
+        if ($podate != 'false') { $query = $query->and_where('date_add'<= $podate); };
         $query = $query ->order_by("date_add","DESC")
             ->join('view', 'INNER')
-            ->on('projects.view', '=', 'view.id_view') 
+            ->on('projects.view', '=', 'view.id_view')
             ->join('user', 'INNER')
             ->on('projects.id_user', '=', 'user.id_user')
             ->join('group', 'INNER')

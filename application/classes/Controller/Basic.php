@@ -6,15 +6,22 @@ class Controller_Basic extends Controller_Template {
 
 	public function action_index()
 	{
-		$search = "false";
+		$search = $full_name = $spec = $group = $view = $manager = $sdate = $podate = "false";
 		if ($_POST) {
 			if ($_POST['search'] != 'false') { $search = $_POST['search']; };
+			if ($_POST['full_name'] != 'false') { $full_name = $_POST['full_name']; };
+			if ($_POST['spec'] != 'false') { $spec = $_POST['spec']; };
+			if ($_POST['group'] != 'false') { $group = $_POST['group']; };
+			if ($_POST['view'] != 'false') { $view = $_POST['view']; };
+			if ($_POST['manager'] != 'false') { $manager = $_POST['manager']; };
+			if ($_POST['sdate'] != 'false') { $sdate = $_POST['sdate']; };
+			if ($_POST['podate'] != 'false') { $podate = $_POST['podate']; };
 		}
 		$this->template->styles = array('home');
 		$specialty = Model::factory('select')
 			->specialty();
 		$variable = Model::factory('select')
-			->variable($search);
+			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate);
 		$view = Model::factory('select')
 			->view();
 		$group = Model::factory('select')
