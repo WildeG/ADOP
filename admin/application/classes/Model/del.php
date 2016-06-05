@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
  
-class Model_Add extends Model
+class Model_Del extends Model
 {
 
 	public function specialty($cipher, $title_spec)
@@ -9,10 +9,10 @@ class Model_Add extends Model
             ->values(array($cipher, $title_spec));
     }
 
-    public function view_project($view)
+    public function view_project($id)
     {
-        DB::insert('view', array('view'))
-            ->values(array($view))
+        DB::delete('view')
+            ->where('id_view', '=', $id)
             ->execute();
     }
 

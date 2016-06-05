@@ -7,7 +7,7 @@
 
 <link href="public/css/bootstrap.min.css" rel="stylesheet">
 
-
+ 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
 <?php if (isset($styles)) { foreach($styles as $style): ?>

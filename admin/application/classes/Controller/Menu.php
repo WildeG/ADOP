@@ -131,8 +131,11 @@ class Controller_Menu extends Controller_Template {
 
     public function action_view_project() // Виды проектов
     {
+
+        $res = View::factory('result/view_project')
+                ->bind('view', $view);
         $content = View::factory('menu/view_project')
-            ->bind('view', $view);
+            ->bind('table', $res);
         $view = Model::factory('select')
             ->view();
         $this->template->styles = array('style','menu/view_project');
