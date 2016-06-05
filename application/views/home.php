@@ -11,17 +11,9 @@
 
 <div class="container col-xs-9 col-md-offset-1" id="one" style="display: none; margin-bottom: 60px;">
 	<div class="form-group">
-		<div class="col-xs-4">
+		<div class="col-xs-12">
 			<label class="control-label">Фамилия:</label>
-			<input type="text" class="form-control" id="family" name="family" placeholder="Фамилия">
-		</div>
-		<div class="col-xs-4">
-			<label class="control-label">Имя:</label>
-			<input type="text" class="form-control" id="name" name="name" placeholder="Имя">
-		</div>
-		<div class="col-xs-4">
-			<label class="control-label">Отчество:</label>
-			<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Отчество">
+			<input type="text" class="form-control" id="full_name" name="full_name" placeholder="Фамилия">
 		</div>
 	</div>
 	<div class="form-group">
@@ -101,7 +93,8 @@ function search() {
 	$.ajax({
 		type: "POST",
 		url: "/Insert/filter",
-		data: {search:search},
+		data: {	search:search
+				},
 		dataType: "html",
 		success: function(data) { // когда получаем ответ
 			// if(!data.error){ // Если ошибки нет, то удаляем строку
