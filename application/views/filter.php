@@ -13,7 +13,7 @@
 	<tbody>
 		<?php
 		foreach ($variable as $value) {
-	echo "<tr><td>".($value['id_projects']+1)."</td><td>".HTML::date($value['date_add'])."</td><td>".$value['title']."</td><td>".$value['view']."</td><td>".$value['subject']	."</td><td>".$value['full_name']."</td><td>".$value['group']."</td></tr>";
+	echo "<tr><td>".($value['id_projects']+1)."</td><td>".HTML::date($value['date_add'])."</td><td>".$value['title']."</td><td>".$value['view']."</td><td>".$value['subject']	."</td><td>".$value['family']."&nbsp".$value['name']."&nbsp".$value['last name']."</td><td>".$value['group']."</td></tr>";
 		} ?>
 	</tbody>
 </table>
