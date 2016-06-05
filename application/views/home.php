@@ -12,15 +12,15 @@
 <div class="container col-xs-9 col-md-offset-1" id="one" style="display: none; margin-bottom: 60px;">
 	<div class="form-group">
 		<div class="col-xs-12">
-			<label class="control-label">Фамилия Имя Отчество</label>
+			<label class="control-label">Полное имя</label>
 			<input type="text" class="form-control" id="full_name" name="full_name" placeholder="Фамилия">
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-xs-4">
 			<label class="control-label">Специальность:</label>
-			<select name="specialty" class="form-control">
-				<option value="false" id="spec" name="spec">-Все специальности-</option>
+			<select name="specialty" id="spec" class="form-control">
+				<option value="false" name="spec">-Все специальности-</option>
 				<?php 
 				foreach ($specialty as $value) {
 					echo "<option value='".$value['cipher']."'>".$value['title_spec']."</option>";
@@ -30,8 +30,8 @@
 		</div>
 		<div class="col-xs-4">
 			<label class="control-label">Группа:</label>
-			<select name="group" class="form-control">
-				<option value="false" id="group" name="group">-Все группы-</option>
+			<select name="group" id="group" class="form-control">
+				<option value="false" name="group">-Все группы-</option>
 				<?php 
 				foreach ($group as $value) {
 					echo "<option value='".$value['id_group']."'>".$value['group']."</option>";
@@ -41,8 +41,8 @@
 		</div>
 		<div class="col-xs-4">
 			<label class="control-label">Вид проекта:</label>
-			<select name="view" class="form-control">
-				<option value="false" id="view" name="view">-Все виды-</option>
+			<select name="view" id="view" class="form-control">
+				<option value="false" name="view">-Все виды-</option>
 				<?php 
 				foreach ($view as $value) {
 					echo "<option value='".$value['id_view']."'>".$value['view']."</option>";
@@ -54,8 +54,8 @@
 	<div class="form-group">
 		<div class="col-xs-4">
 			<label class="control-label">Руководитель:</label>
-			<select name="manager" class="form-control">
-				<option value="false" id="manager" name="manager">-Все руководители-</option>
+			<select name="manager" id="manager" class="form-control">
+				<option value="false" name="manager">-Все руководители-</option>
 				<?php
 				foreach ($manager as $value) {
 					echo "<option value='".$value['id_manager']."'>".$value['full_name']."</option>";
