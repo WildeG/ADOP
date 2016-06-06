@@ -3,6 +3,31 @@
 class Model_Select extends Model
 {
 
+    public function user_search($search)
+    {
+        $query = DB::select()
+            ->from("user");
+        if (!empty($search)) {
+            $query = $query ->where('full_name', 'LIKE', '%'.$search.'%');
+        }
+        $query = $query ->join('group', 'INNER')
+            ->on('user.id_group', '=', 'group.id_group')
+            ->join('specialty', 'INNER')
+            ->on('group.cipher', '=', 'specialty.cipher')
+            ->order_by("full_name","ASC")
+            ->execute();
+        return $query;
+    }
+
+    public function progress($id)
+    {
+        return DB::select('progress', array('COUNT(*)', 'count'))
+            ->from("progress")
+            ->where('id_user', '=', $id)
+            ->group_by('progress')
+            ->execute();
+    }
+
     public function user()
     {
         return DB::select()

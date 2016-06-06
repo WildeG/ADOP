@@ -24,7 +24,7 @@
 		<tr>
 			<th>Заголовок</th>
 			<th>Вид проекта</th>
-			<th>Документ <span class="glyphicon glyphicon-floppy-save"></span></th>
+			<th>Прогресс</th>
 		</tr>
 	</thead>
 	<tbody>

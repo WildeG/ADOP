@@ -15,4 +15,23 @@ class Controller_Insert extends Controller {
         }
 	}
 
+    public function action_user()
+    {
+        if (!empty($_POST)){
+            $full_name = $_POST['full_name'];
+            $group = $_POST['group'];
+            $password = $_POST['password'];
+            $e_mail = $_POST['e_mail'];
+            $add = Model::factory('add')
+                ->user($full_name, $group, $password, $e_mail);
+            $user = Model::factory('select')
+                ->user();
+            $res = View::factory('result/user')
+                ->bind('user', $user);
+            $this->response->body($res);
+        }
+    }
+
+
+
 }

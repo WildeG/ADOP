@@ -15,4 +15,31 @@ class Controller_Delete extends Controller {
         }
 	}
 
+    public function action_user()
+    {
+        if (!empty($_POST['id'])){
+            $id = $_POST['id'];
+            $add = Model::factory('del')->user($id);
+            $user = Model::factory('select')
+                ->user();
+            $res = View::factory('result/user')
+                ->bind('user', $user);
+            $this->response->body($res);
+        }
+    }
+
+    public function action_specialties()
+    {
+        if (isset($_POST)){
+            $id = $_POST['id'];
+            $add = Model::factory('del')
+                ->specialties($id);
+            $view = Model::factory('select')
+                ->specialty();
+            $res = View::factory('result/specialties')
+                ->bind('spec', $view);
+            $this->response->body($res);
+        }
+    }
+
 }

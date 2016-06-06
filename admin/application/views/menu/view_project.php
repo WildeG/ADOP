@@ -31,7 +31,7 @@ function add() {
 };
 
 function del(id) {
-	if(confirm('Вы действительно хотете удалить?')){
+	if(confirm('Вы действительно хотите удалить?')){
 		$.ajax({
 			type: "POST",
 			url: "/Delete/view_project",

@@ -2,22 +2,22 @@
 <h1>Специальности</h1>
 <h2><small>Добавить специальность</small></h2>
 <div class="container">
-	<form action="/Insert/add_view" class="form-horizontal" role="form" method="POST" id="form_article">
+	<form class="form-horizontal" role="form" method="POST" id="form_article">
 		<div class="form-group col-sm-12" style="padding:0;">
 			<div class="col-sm-4">
-				<input name="view" type="text" class="form-control" placeholder="Код специальности" />
+				<input name="view" type="text" class="form-control" id="cod" placeholder="Код специальности" />
 			</div>
 			<div class="col-sm-6">
-				<input name="view" type="text" class="form-control" placeholder="Название" />
+				<input name="view" type="text" class="form-control" id="title" placeholder="Название" />
 			</div>
 			<div class="col-sm-2">
-				<button type="submit" class="btn btn-primary ">Добавить специальность</button>
+				<button type="button" onclick="add()" class="btn btn-primary ">Добавить специальность</button>
 			</div>
 		</div>
 	</form>
 </div>
 <h2><small>Список специальностей</small></h2>
-<div class="container">
+<div class="container" id="res">
 	<table class="table table-striped">
 		<thead>
 			<th>Код специальности</th>
@@ -30,11 +30,11 @@
 			<tr>
 				<td valign="bottom"><?php echo $item['cipher']?></td>
 				<td valign="center"><?php echo $item['title_spec']?></td>
-				<td valign="center"><button onclick="del(<?php echo $item['cipher']; ?>)" class="delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Удалить</button></td>
+				<td valign="center"><button onclick="del(<?php echo $item['cipher']; ?>)" class="delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspУдалить</button></td>
 			</tr>
 			<?php endforeach; ?>
 			<?php else: ?>
-				<td colspan="4"><center>Добавьте статью</center></td>
+				<td colspan="4"><center>Добавьте специальность</center></td>
 			<?php endif; ?>
 		</tbody>
 	</table>
@@ -42,77 +42,36 @@
 
 
 <script type="text/javascript">
-	$("#form_article").submit(function(){ 
-	var form = $(this);
-	
-	$("[type=submit]",form).attr('disabled','disabled'); 
-	$("#error").empty().hide();
-	
-	var view = $('[view=view]',form).val(); 
-	// var description = $('[name=description]',form).val(); // берем текст из формы
-	/** Если не заполнены поля - то выводим ошибку */
-	if(view == ''){
-		$("#error").html('Ошибка валидации формы!').slideDown();
-		$("[type=submit]",form).removeAttr('disabled');
-		return false;
-	}
-	$.ajax({ 
-			type: "POST", // будем передавать данные через POST
-			url: form.attr('action'), // берем адрес отправки формы и передаем туда наши данные аяксом
-			data: form.serialize(), // серриализируем данные
-			dataType: "json", // указываем, что нам вернется JSON
-			beforeSend: function(){
-				$("#loading").slideDown(); // показываем индикатор загрузки
-			},
-			success: function(data) { // когда получаем ответ
-				if(!data.error){ // Если ошибки нет, то выводим список статей
-					// Если есть статьи - то будем их выводить
-					if(data.content){
-						var html = '';
-						for(var A in data.content){
-							var item = data.content[A];
-							html += '<tr><td>'+item.id+'</td><td>'+item.name+'</td><td><a class="delete btn btn-danger"href="/articles/delete/'+item.id+'">Удалить</a></td></tr>';
-						}
-						$('table.articles tbody').html(html);
-					}
-					form.trigger('reset');
-				}else{
-					$("#error").html(data.message).slideDown();
-				}
-				
-				$("[type=submit]",form).removeAttr('disabled');
-				$("#loading").slideUp();
-			},
-			error: function(){ // Если сервер вернул ошибку, 4хх, 5хх
-				/** Выводим ошибку, делаем кнопку отправки снова активной и убираем индикатор загрузки */
-				$("#error").html('Произошла ошибка').slideDown();
-				$("[type=submit]",form).removeAttr('disabled');
-				$("#loading").slideUp();
-			}
+function add() {
+	var cod = document.getElementById('cod').value;
+	var title = document.getElementById('title').value;
+	$.ajax({
+		type: "POST",
+		url: "/Insert/specialties",
+		data: {	cod:cod,
+				title:title },
+		dataType: "html",
+		beforesend: function () {
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
 	});
-	
-	return false;
-});
+};
 
-/** Функция удаления статьи */
-$('body').on('click','.delete',function(){
-	var link = $(this);
-	if(confirm('Вы действительно хотете удалить?')){
-		$.ajax({
-			type: "POST",
-			url: link.attr('href'), // берем адрес из ссылки
-			dataType: "json",
-			success: function(data) { // когда получаем ответ
-				if(!data.error){ // Если ошибки нет, то удаляем строку
-					link.closest('tr').hide(function(){
-						$(this).remove();
-					})
-				}else{ // Если сервер вернул ошибку то выводим текст ошибки
-					$("#error").html(data.message).slideDown();
-				}
-			}
-		});
-	}
-	return false;
-});
+function del(id) {
+	$.ajax({
+		type: "POST",
+		url: "/Delete/specialties",
+		data: {	id:id },
+		dataType: "html",
+		beforesend: function () {
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	});
+}
 </script>
