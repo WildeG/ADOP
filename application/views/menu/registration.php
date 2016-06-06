@@ -12,28 +12,21 @@
 		</div>
 	</div>
 	<div class="form-group">
-    <label class="control-label col-xs-3" for="lastName">Фамилия:</label>
+    <label class="control-label col-xs-3" for="full_name">Полное имя:</label>
     <div class="col-xs-5">
-      <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-xs-3" for="firstName">Имя:</label>
-    <div class="col-xs-5">
-      <input type="text" class="form-control" id="firstName" placeholder="Введите имя">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-xs-3" for="fatherName">Отчество:</label>
-    <div class="col-xs-5">
-      <input type="text" class="form-control" id="fatherName" placeholder="Введите отчество">
+      <input type="text" class="form-control" id="full_name" placeholder="Введите Имя">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-xs-3">Группа:</label>
     <div class="col-xs-5">
       <select class="form-control">
-        <option></option>
+        <option value="false" name="group">-Все группы-</option>
+        <?php 
+        foreach ($group as $value) {
+          echo "<option value='".$value['id_group']."'>".$value['group']."</option>";
+        }
+        ?>
       </select>
     </div>
   </div>

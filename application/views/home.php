@@ -99,7 +99,7 @@ function search() {
 	var podate = document.getElementById('podate').value;
 	$.ajax({
 		type: "POST",
-		url: "/Insert/filter",
+		url: "/Select/filter",
 		data: {	search:search,
 				full_name:full_name,
 				spec:spec,

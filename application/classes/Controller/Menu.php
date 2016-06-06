@@ -17,7 +17,10 @@ class Controller_Menu extends Controller_Template {
 
     public function action_registration() // Регистрация
     {
-        $content = View::factory('menu/registration');
+        $group = Model::factory('select')
+            ->group();
+        $content = View::factory('menu/registration')
+            ->bind('group', $group);
         $this->template->styles = array('menu/registration');
         $this->template->title = 'Регистрация';
         $this->template->content = $content;
