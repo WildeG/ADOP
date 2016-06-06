@@ -1,6 +1,6 @@
 <div class="alert alert-danger col-sm-12" id="error" style="display:none;"></div>
-<h1>Возможные темы</h1>
-<h2><small>Добавить тему</small></h2>
+<h1>Пользователи</h1>
+<h2><small>Добавить пользователя</small></h2>
 <div class="container">
 	<form action="/Insert/add_view" class="form-horizontal" role="form" method="POST" id="form_article">
 		<div class="form-group col-sm-12">
@@ -46,20 +46,20 @@
 		</div>
 	</form>
 </div>
-<h2><small>Список пользователей</small></h2>
-<div class="container">
-	<div class="form-group col-sm-12" style="padding: 0; margin-bottom: 0;">
-		<div class="btn-group" style="float:left;">
-			<input type="button" class="btn btn-default" value="Все">
-			<input type="button" class="btn btn-default" value="Неподтвержденные">
-		</div>
-		<div class="form-group col-sm-4 text-right" style="float:right; margin-right: 15px;">
-			<div class="col-sm-8" style="padding-left: 5px;">
-				<input type="text" class="form-control" placeholder="Поиск">
-			</div>
-			<input type="button" class="btn btn-primary col-sm-4" value="Поиск">
-		</div>
+<div class="form-group col-sm-12" style="padding: 0; margin-top: 30px;">
+	<h2 class="col-sm-8"><small>Список пользователей</small></h2>
+	<div class="input-group col-sm-4 text-right" style="padding: 10px 15px 0 0;">
+		<input type="text" class="form-control" placeholder="Поиск">
+		<span class="input-group-btn">
+      		<button class="btn btn-primary" type="button">Поиск</button>
+     	</span>
 	</div>
+</div>
+<div class="container">
+	<ul class="nav nav-tabs" style="margin-right: 30px;">
+  		<li class="active"><a href="#">Все</a></li>
+  		<li><a href="#">Неподтвержденные</a></li>
+	</ul>
 	<div class="container col-sm-12" style="padding:0 30px 0 0;">
 		<table class="table table-striped">
 			<thead>
@@ -86,7 +86,7 @@
 							<button onclick="del(<?php echo $item['id_user']; ?>)" class="delete btn btn-danger btn-xs">
 								<span class="glyphicon glyphicon-trash"></span> Удалить
 							</button>
-							<button onclick="del(<?php echo $item['id_user']; ?>)" class="btn btn-info btn-xs">
+							<button onclick="info(<?php echo $item['id_user']; ?>)" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-info btn-xs">
 								<span class="glyphicon glyphicon-info-sign"></span> Подробно
 							</button>
 						</div>
@@ -100,9 +100,42 @@
 		</table>
 	</div>
 </div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="modal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Карточка пользователя</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script type="text/javascript">
+function info(id) {
+	$.ajax({
+		type: "POST",
+		url: "/Select/id_user",
+		data: {	id:id },
+		dataType: "html",
+		beforesend: function () {
+			$("#modal").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#modal").html(data);
+		}
+	});
+}
+
+
+
 	$("#form_article").submit(function(){ 
 	var form = $(this);
 	
