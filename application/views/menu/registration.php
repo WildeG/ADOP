@@ -1,27 +1,27 @@
-<form class="form-horizontal col-xs-8 col-md-offset-2">
+<form class="form-horizontal col-xs-8 col-md-offset-2" action="/Insert/adduser" method="post">
 	<div class="form-group">
 		<label for="inputEmail" class="col-xs-3 control-label">Адрес email:</label>
 		<div class="col-xs-5">
-			<input type="email" class="form-control" id="inputEmail" placeholder="Введите email">
+			<input type="email" class="form-control" name="inputEmail" placeholder="Введите email">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="inputPassword" class="col-xs-3 control-label">Пароль:</label>
 		<div class="col-xs-5">
-			<input type="password" class="form-control" id="inputPassword" placeholder="Введите пароль">
+			<input type="password" class="form-control" name="inputPassword" placeholder="Введите пароль">
 		</div>
 	</div>
 	<div class="form-group">
     <label class="control-label col-xs-3" for="full_name">Полное имя:</label>
     <div class="col-xs-5">
-      <input type="text" class="form-control" id="full_name" placeholder="Введите Имя">
+      <input type="text" class="form-control" name="full_name" placeholder="Введите Имя">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-xs-3">Группа:</label>
     <div class="col-xs-5">
-      <select class="form-control">
-        <option value="false" name="group">-Все группы-</option>
+      <select name="group" class="form-control">
+        <option value="false">-Все группы-</option>
         <?php 
         foreach ($group as $value) {
           echo "<option value='".$value['id_group']."'>".$value['group']."</option>";
