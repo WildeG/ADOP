@@ -6,7 +6,7 @@ class Controller_Insert extends Controller {
 	{
 		if ($_POST) {
 			$e_mail = $_POST['inputEmail'];
-			$password = $_POST['inputPassword'];
+			$password = md5(md5(trim($_POST['inputPassword'])));
 			$full_name = $_POST['full_name'];
 			$group = $_POST['group'];
 			$add = Model::factory('Add')->adduser($full_name, $e_mail, $password, $group);

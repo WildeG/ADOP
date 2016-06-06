@@ -22,15 +22,15 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="<?php echo URL::base(); ?>"><?php echo $title; ?></a>
 			</div>
-			<div class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" role="form">
+			<div id='auth' class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" name='logform' role="form">
 					<div class="form-group">
-						<input type="text" placeholder="Логин" class="form-control">
+						<input name="login" id="login" type="text" placeholder="Логин" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="password" placeholder="Пароль" class="form-control">
+						<input name="pass" id="pass" type="password" placeholder="Пароль" class="form-control">
 					</div>
-					<button type="submit" class="btn btn-info">Войти</button>
+					<button id='log_btn' onclick="logs()" type="button" class="btn btn-info">Войти</button>
 					<a href="<?php echo URL::base(); ?>registration"><label class="btn btn-warning">Регистрация</label></a>
 				</form>
 			</div>
@@ -53,3 +53,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="public/js/bootstrap.min.js"></script>
 </html>
+<script type="text/javascript">
+function logs() {
+	var login = document.getElementById('login').value;
+	var pass = document.getElementById('pass').value;
+  	$.ajax({
+    	type: "POST",
+   		url: "Auth/auth",
+    	data: {login:login,
+    			pass:pass},
+    	dataType: "html",
+		success: function(data) { // когда получаем ответ
+			// if(!data.error){ // Если ошибки нет, то удаляем строку
+				$("#res").html(data);
+    	},
+    	error: function(data) {
+      	alert('error');
+    	}
+  });
+};
+</script>

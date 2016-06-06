@@ -30,17 +30,6 @@
       </select>
     </div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-xs-3">Год поступления:</label>
-    <div class="col-xs-5">
-      <select class="form-control">
-      	<?php	for ($i=1990; $i < date('Y'); $i++) {
-      		if ($i == (date('Y')-4)) { $selected = " selected "; } else { $selected = ''; };
-      		echo "<option ".$selected." >".$i."</option>";
-      	} ?>
-      </select>
-    </div>
-  </div>
 	<div class="form-group">
     <div class="col-xs-offset-3 col-xs-5">
       <input type="submit" class="btn btn-primary" value="Регистрация">
