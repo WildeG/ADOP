@@ -9,7 +9,7 @@ class Model_Add extends Model
     // запрос на получение хэша пароля из таблицы
     		$sql = DB::select('password')
             ->from("user")
-            ->where('e-mail', '=', '?s')
+            ->where('e-mail', '=', $login)
             ->execute();
     		$pas = DB::getOne($sql, $login);
 

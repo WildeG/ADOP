@@ -42,14 +42,14 @@
 	<div class="input-group col-sm-4 text-right" style="padding: 10px 15px 0 0;">
 		<input type="text" class="form-control" id="search" placeholder="Поиск">
 		<span class="input-group-btn">
-      		<button class="btn btn-primary" onclick="search()" type="button">Поиск</button>
+      		<button class="btn btn-primary" id="search_b" onclick="search('all')" type="button">Поиск</button>
      	</span>
 	</div>
 </div>
 <div class="container">
 	<ul class="nav nav-tabs" id="myTab" style="margin-right: 30px;">
-  		<li class="active"><a onclick="first()" href="#">Все</a></li>
-  		<li><a onclick="last()" href="#">Неподтвержденные</a></li>
+  		<li class="active"><a onclick="first();filter('all')" href="#">Все</a></li>
+  		<li><a onclick="last();filter('0')" href="#">Неподтвержденные</a></li>
 	</ul>
 	<div class="container col-sm-12" id="res" style="padding:0 30px 0 0;">
 		<table class="table table-striped">
@@ -155,6 +155,23 @@ function add() {
 	});
 };
 
+function filter(filter) {
+	
+	$.ajax({
+		type: "POST",
+		url: "/Select/users",
+		data: {	filter:filter },
+		dataType: "html",
+		beforesend: function () {
+			$("#search_b").attr("onClick","search("+filter+")");
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	});
+}
+
 function confirm(id) {
 	$.ajax({
 		type: "POST",
@@ -170,12 +187,12 @@ function confirm(id) {
 	});
 }
 
-function search() {
+function search(filter) {
 	var search = document.getElementById('search').value;
 	$.ajax({
 		type: "POST",
 		url: "/Select/users",
-		data: {	search:search },
+		data: {	search:search, filter:filter },
 		dataType: "html",
 		beforesend: function () {
 			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");

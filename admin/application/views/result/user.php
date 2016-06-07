@@ -26,6 +26,8 @@
 					<button onclick="info(<?php echo $item['id_user']; ?>)" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-info btn-xs">
 						<span class="glyphicon glyphicon-info-sign"></span> Подробно
 					</button>
+					<?php if ($item['active']==0) {
+								echo "<button onclick='confirm(".$item['id_user'].")' class='btn btn-success btn-xs'> <span class='glyphicon glyphicon-ok'></span> Подтвердить </button>"; } ?>
 				</div>
 			</td>
 		</tr>

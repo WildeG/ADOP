@@ -45,7 +45,7 @@
 				<option value="false" name="view">-Все виды-</option>
 				<?php 
 				foreach ($view as $value) {
-					echo "<option value='".$value['id_view']."'>".$value['view']."</option>";
+				1b	echo "<option value='".$value['id_view']."'>".$value['view']."</option>";
 				}
 				?>
 			</select>

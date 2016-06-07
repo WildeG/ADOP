@@ -12,4 +12,12 @@ class Controller_Insert extends Controller {
 			$add = Model::factory('Add')->adduser($full_name, $e_mail, $password, $group);
 		}
 	}
+
+	public function action_manager()
+	{
+		if ($_POST) {
+			$full_name = $_POST['full_name'];
+			$add = Model::factory('Add')->manager($full_name);
+		}
+	}
 }

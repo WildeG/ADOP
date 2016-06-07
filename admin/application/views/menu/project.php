@@ -1,14 +1,61 @@
 <div class="alert alert-danger col-sm-12" id="error" style="display:none;"></div>
 <h1>Проекты</h1>
 <h2><small>Добавить проект</small></h2>
+<div class="container">
+	<form class="form-horizontal" role="form" method="POST" id="form_article">
+		<input type="text" class="form-control" id="title" placeholder="Название проекта" style="margin-bottom: 15px;">
+		<textarea id="discriptions" class="form-control" placeholder="Описание" style="margin-bottom: 15px;"></textarea>
+		<div class="form-group" style="padding:0;">
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="subject" placeholder="Предмет">
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="user" placeholder="Пользователь">
+			</div>
+		</div>
+		<div class="form-group" style="padding:0;">
+			<div class="col-sm-4">
+				<select class="form-control" id="manager">
+					<?php 
+					foreach ($manager as $value) {
+						echo "<option value='".$value['id_manager']."' >".$value['full_name']."</option>";
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<select class="form-control" id="view">
+					<?php 
+					foreach ($view as $value) {
+						echo "<option value='".$value['id_view']."' >".$value['view']."</option>";
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<input type="file" class="form-control" id="document">
+			</div>
+		</div>
+		<div class="form-group text-right" style="padding:0 15px;">
+			<div class="btn-group">
+				<input type="reset" class="btn btn-default" value="Очистить форму">
+				<input type="button" onclick="add()" class="btn btn-primary" value="Зарегестрировать пользователя">
+			</div>
+		</div>
+	</form>
+</div>
 <h2><small>Текущие проекты</small></h2>
 <div class="container">
 	<div class="form-group">
-		<div class="col-xs-12">
-			<input type="text" class="form-control" id="search" name="search" placeholder="Название проекта">
+		<div class="input-group col-sm-12" style="padding:0;">
+			<input type="text" class="form-control" id="search" placeholder="Поиск">
+			<span class="input-group-btn">
+      			<button class="btn btn-primary" id="search_b" onclick="search('all')" type="button">Поиск</button>
+     		</span>
 		</div>
-		<input type="button" class="btn btn-info" onclick="search()" value="Поиск">
-		<a onclick="$('#one').slideToggle('slow');" href="javascript://"><span class="caret"></span></a>
+		<div class="form-group col-sm-12 text-right" style="padding:0;">
+			<a onclick="$('#one').slideToggle('slow');" href="javascript://">Фильтр<span class="caret"></span></a>
+		</div>
 	</div>
 	<div class="container col-xs-9 col-md-offset-1" id="one" style="display: none; margin-bottom: 60px;">
 		<div class="form-group">

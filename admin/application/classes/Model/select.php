@@ -3,12 +3,16 @@
 class Model_Select extends Model
 {
 
-    public function user_search($search)
+    public function user_search($search, $filter)
     {
         $query = DB::select()
-            ->from("user");
-        if (!empty($search)) {
-            $query = $query ->where('full_name', 'LIKE', '%'.$search.'%');
+            ->from("user")
+            ->where('id_user', '>=', '0');
+        if ($search!="false") {
+            $query = $query ->and_where('full_name', 'LIKE', '%'.$search.'%');
+        }
+        if ($filter!="all") {
+            $query = $query ->and_where('active', '=', $filter);
         }
         $query = $query ->join('group', 'INNER')
             ->on('user.id_group', '=', 'group.id_group')
