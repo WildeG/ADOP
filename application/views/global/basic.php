@@ -59,7 +59,7 @@ function logs() {
 	var pass = document.getElementById('pass').value;
   	$.ajax({
     	type: "POST",
-   		url: "Auth/auth",
+   		url: "/Auth/auth",
     	data: {login:login,
     			pass:pass},
     	dataType: "html",

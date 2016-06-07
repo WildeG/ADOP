@@ -5,19 +5,11 @@ class Model_Add extends Model
 	public function auth($login, $pass)
     {
 
-		if(isset($login) && isset($pass)){
+		if(($login != 'false') && ($pass != 'false')){
     // запрос на получение хэша пароля из таблицы
-    		$sql = DB::select('password')
+    		$sql = DB::select('full_name')
             ->from("user")
-            ->where('e-mail', '=', '?s')
+            ->where('e-mail', '=', $login)
+            ->and_where('password', '=', md5(md5($pass)))
             ->execute();
-    		$pas = DB::getOne($sql, $login);
-
-    // сравнение с введенным юзером паролем
-    		if ($pas === md5(md5($pass))){
-        		exit('yes');
-    		}
-		}	
-		echo 'no';
-    }
-}
+}}}
