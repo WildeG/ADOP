@@ -10,6 +10,7 @@ class Controller_Insert extends Controller {
 			$full_name = $_POST['full_name'];
 			$group = $_POST['group'];
 			$add = Model::factory('Add')->adduser($full_name, $e_mail, $password, $group);
+			$this->redirect('http://diplom.loc/');
 		}
 	}
 
