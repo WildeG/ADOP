@@ -65,7 +65,7 @@ function logs() {
     	dataType: "html",
 		success: function(data) { // когда получаем ответ
 			// if(!data.error){ // Если ошибки нет, то удаляем строку
-				$("#res").html(data);
+				$("#auth").html(data);
     	},
     	error: function(data) {
       	alert('error');
