@@ -14,7 +14,7 @@
 	</form>
 </div>
 <h2><small>Список руководителей</small></h2>
-<div class="container">
+<div class="container" id="res">
 	<table class="table table-striped">
 		<thead>
 			<th>ФИО руководители</th>

@@ -13,12 +13,4 @@ class Controller_Insert extends Controller {
 			$this->redirect('http://diplom.loc/');
 		}
 	}
-
-	public function action_manager()
-	{
-		if ($_POST) {
-			$full_name = $_POST['full_name'];
-			$add = Model::factory('Add')->manager($full_name);
-		}
-	}
 }

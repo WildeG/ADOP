@@ -32,6 +32,17 @@ class Controller_Insert extends Controller {
         }
     }
 
-
+    public function action_manager()
+    {
+        if ($_POST) {
+            $full_name = $_POST['full_name'];
+            $add = Model::factory('Add')->manager($full_name);
+            $mang = Model::factory('select')
+                ->manager();
+            $res = View::factory('result/manager')
+                ->bind('mang', $mang);
+            $this->response->body($res);
+        }
+    }
 
 }

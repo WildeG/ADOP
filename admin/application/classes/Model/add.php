@@ -24,4 +24,11 @@ class Model_Add extends Model
             ->execute();
     }
 
+    public function manager($full_name)
+    {
+        DB::insert('manager', array('full_name'))
+            ->values(array($full_name))
+            ->execute();
+    }
+
 }
