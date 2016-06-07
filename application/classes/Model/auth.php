@@ -1,16 +1,17 @@
 <?php defined('SYSPATH') or die('No direct script access.');
  
-class Model_Add extends Model
+class Model_Auth extends Model
 {
 	public function auth($login, $pass)
     {
-
 		if(($login != 'false') && ($pass != 'false')){
-    // запрос на получение хэша пароля из таблицы
-    		$sql = DB::select('full_name')
+        // запрос на получение хэша пароля из таблицы
+    		return DB::select()
             ->from("user")
             ->where('e-mail', '=', $login)
-            ->and_where('password', '=', md5(md5($pass)))
-            ->execute();
-    	
-}}}
+            ->and_where('password', '=', $pass)
+            ->execute()
+            ->as_array();
+        }
+    }
+}

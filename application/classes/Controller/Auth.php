@@ -6,13 +6,19 @@ class Controller_Auth extends Controller {
 	{
 		if ($_POST) {
 			if (!empty($_POST['login'])) { $login = $_POST['login']; } else { $login = "false"; };
-			if (!empty($_POST['pass'])) { $pass = $_POST['pass']; } else { $pass = "false"; };
+			if (!empty($_POST['pass'])) { $pass = md5(md5($_POST['pass'])); } else { $pass = "false"; };
+			$res = Model::factory('auth')
+				->auth($login, $pass);
+			if (isset($res)) {
+				$content = View::factory('global/auth')
+					->bind('res', $res);
+				$this->response->body($content);
+			} else {
+				$content = View::factory('global/auth')
+					->bind('res', 'Ошибка');
+				$this->response->body($content);
+			}
 		}
-		$res = Model::factory('auth')
-			->auth($login, $fpass);
-		$content = View::factory('global/auth')
-			->bind('res', $res)
-		$this->response->body($content);
 	}
 
 }

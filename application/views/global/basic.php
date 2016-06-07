@@ -66,9 +66,6 @@ function logs() {
 		success: function(data) { // когда получаем ответ
 			// if(!data.error){ // Если ошибки нет, то удаляем строку
 				$("#auth").html(data);
-    	},
-    	error: function(data) {
-      	alert('error');
     	}
   });
 };
