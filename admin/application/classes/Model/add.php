@@ -31,4 +31,11 @@ class Model_Add extends Model
             ->execute();
     }
 
+    public function group($numbgr, $year, $spec)
+    {
+        DB::insert('group', array('group', 'date_receipt', 'cipher'))
+            ->values(array($numbgr, $year, $spec))
+            ->execute();
+    }
+
 }

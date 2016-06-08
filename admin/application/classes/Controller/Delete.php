@@ -42,4 +42,33 @@ class Controller_Delete extends Controller {
         }
     }
 
+    public function action_manager()
+    {
+        if (isset($_POST)){
+            $id = $_POST['id'];
+            $add = Model::factory('del')
+                ->manager($id);
+            $view = Model::factory('select')
+                ->manager();
+            $res = View::factory('result/manager')
+                ->bind('mang', $view);
+            $this->response->body($res);
+        }
+    }
+
+    public function action_group()
+    {
+        if (isset($_POST)){
+            $id = $_POST['id'];
+            $add = Model::factory('del')
+                ->group($id);
+            $group = Model::factory('select')
+                ->group();
+            $res = View::factory('result/group')
+                ->bind('group', $group);
+            $this->response->body($res);
+        }
+    }
+
+
 }

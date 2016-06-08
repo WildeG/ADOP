@@ -2,27 +2,16 @@
 <h1>Группы</h1>
 <h2><small>Добавить группу</small></h2>
 <div class="container">
-	<form action="/Insert/add_view" class="form-horizontal" role="form" method="POST" id="form_article">
-
+	<form class="form-horizontal" role="form" method="POST" id="form_article">
 		<div class="form-group">
 		<div class="col-sm-4">
-			<input name="view" type="text" class="form-control" placeholder="Номер группы" />
+			<input id="numbgr" type="text" class="form-control" placeholder="Номер группы" />
 		</div>
 		<div class="col-sm-4">
-			<select class="form-control col-sm-4">
-				<?php 
-				for ($i=1980; $i <= date("Y"); $i++) { 
-					if (date("Y")!=$i) {
-						echo "<option>".$i."</option>";
-					} else {
-						echo "<option selected>".$i."</option>";
-					}
-				}
-				?>
-			</select>
+			<input id="year" type="date" class="form-control" />
 		</div>
 		<div class="col-sm-4">
-			<select class="form-control col-sm-4">
+			<select class="form-control col-sm-4" id="spec">
 				<?php 
 				foreach ($specialty as $value) {
 					echo "<option>".$value['cipher']."</option>";
@@ -33,13 +22,13 @@
 		</div>
 		<div class="form-group">
 		<div class="col-sm-2 col-sm-offset-10" align="right">
-			<button type="submit" class="btn btn-primary ">Добавить группу</button>
+			<button type="button" onclick="add()" class="btn btn-primary ">Добавить группу</button>
 		</div>
 		</div>
 	</form>
 </div>
 <h2><small>Список видов</small></h2>
-<div class="container">
+<div class="container" id="res">
 	<table class="table table-striped">
 		<thead>
 			<th>Номер группы</th>
@@ -66,77 +55,37 @@
 
 
 <script type="text/javascript">
-	$("#form_article").submit(function(){ 
-	var form = $(this);
-	
-	$("[type=submit]",form).attr('disabled','disabled'); 
-	$("#error").empty().hide();
-	
-	var view = $('[view=view]',form).val(); 
-	// var description = $('[name=description]',form).val(); // берем текст из формы
-	/** Если не заполнены поля - то выводим ошибку */
-	if(view == ''){
-		$("#error").html('Ошибка валидации формы!').slideDown();
-		$("[type=submit]",form).removeAttr('disabled');
-		return false;
-	}
-	$.ajax({ 
-			type: "POST", // будем передавать данные через POST
-			url: form.attr('action'), // берем адрес отправки формы и передаем туда наши данные аяксом
-			data: form.serialize(), // серриализируем данные
-			dataType: "json", // указываем, что нам вернется JSON
-			beforeSend: function(){
-				$("#loading").slideDown(); // показываем индикатор загрузки
-			},
-			success: function(data) { // когда получаем ответ
-				if(!data.error){ // Если ошибки нет, то выводим список статей
-					// Если есть статьи - то будем их выводить
-					if(data.content){
-						var html = '';
-						for(var A in data.content){
-							var item = data.content[A];
-							html += '<tr><td>'+item.id+'</td><td>'+item.name+'</td><td><a class="delete btn btn-danger"href="/articles/delete/'+item.id+'">Удалить</a></td></tr>';
-						}
-						$('table.articles tbody').html(html);
-					}
-					form.trigger('reset');
-				}else{
-					$("#error").html(data.message).slideDown();
-				}
-				
-				$("[type=submit]",form).removeAttr('disabled');
-				$("#loading").slideUp();
-			},
-			error: function(){ // Если сервер вернул ошибку, 4хх, 5хх
-				/** Выводим ошибку, делаем кнопку отправки снова активной и убираем индикатор загрузки */
-				$("#error").html('Произошла ошибка').slideDown();
-				$("[type=submit]",form).removeAttr('disabled');
-				$("#loading").slideUp();
-			}
+function add() {
+	var numbgr = document.getElementById('numbgr').value;
+	var year = document.getElementById('year').value;
+	var spec = document.getElementById('spec').value;
+	$.ajax({
+		type: "POST",
+		url: "/Insert/group",
+		data: {	numbgr:numbgr,
+			year:year,
+			spec:spec },
+		dataType: "html",
+		beforesend: function () {
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	}); 
+};
+function del(id) {
+	$.ajax({
+		type: "POST",
+		url: "/Delete/group",
+		data: {	id:id },
+		dataType: "html",
+		beforesend: function () {
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
 	});
-	
-	return false;
-});
-
-/** Функция удаления статьи */
-$('body').on('click','.delete',function(){
-	var link = $(this);
-	if(confirm('Вы действительно хотете удалить?')){
-		$.ajax({
-			type: "POST",
-			url: link.attr('href'), // берем адрес из ссылки
-			dataType: "json",
-			success: function(data) { // когда получаем ответ
-				if(!data.error){ // Если ошибки нет, то удаляем строку
-					link.closest('tr').hide(function(){
-						$(this).remove();
-					})
-				}else{ // Если сервер вернул ошибку то выводим текст ошибки
-					$("#error").html(data.message).slideDown();
-				}
-			}
-		});
-	}
-	return false;
-});
+}
 </script>

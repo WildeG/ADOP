@@ -24,4 +24,18 @@ class Model_Del extends Model
             ->execute();
     }
 
+    public function manager($id)
+    {
+        DB::delete('manager')
+            ->where('id_manager', '=', $id)
+            ->execute();
+    }
+
+    public function group($id)
+    {
+        DB::delete('group')
+            ->where('id_group', '=', $id)
+            ->execute();
+    }
+
 }

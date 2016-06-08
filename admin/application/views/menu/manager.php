@@ -50,6 +50,20 @@ function add() {
 		success: function(data) {
 			$("#res").html(data);
 		}
-	});
+	}); 
 };
+function del(id) {
+	$.ajax({
+		type: "POST",
+		url: "/Delete/manager",
+		data: {	id:id },
+		dataType: "html",
+		beforesend: function () {
+			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	});
+}
 </script>

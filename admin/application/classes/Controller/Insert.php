@@ -6,7 +6,8 @@ class Controller_Insert extends Controller {
 	{
 		if (!empty($_POST['view'])){
             $view = $_POST['view'];
-            $add = Model::factory('add')->view_project($view);
+            $add = Model::factory('add')
+                ->view_project($view);
         	$view = Model::factory('select')
             	->view();
             $res = View::factory('result/view_project')
@@ -32,11 +33,43 @@ class Controller_Insert extends Controller {
         }
     }
 
+    public function action_specialties()
+    {
+        if (!empty($_POST)){
+            $cod = $_POST['cod'];
+            $title = $_POST['title'];
+            $add = Model::factory('add')
+                ->specialties($cod, $title);
+            $spec = Model::factory('select')
+                ->specialty();
+            $res = View::factory('result/specialties')
+                ->bind('spec', $spec);
+            $this->response->body($res);
+        }
+    }
+
+    public function action_group()
+    {
+        if ($_POST){
+            $numbgr = $_POST['numbgr'];
+            $year = date("Y-m-d", strtotime($_POST['year']));
+            $spec = $_POST['spec'];
+            $add = Model::factory('add')
+                ->group($numbgr, $year, $spec);
+            $group = Model::factory('select')
+                ->group();
+            $res = View::factory('result/group')
+                ->bind('group', $group);
+            $this->response->body($res);
+        }
+    }
+
     public function action_manager()
     {
         if ($_POST) {
             $full_name = $_POST['full_name'];
-            $add = Model::factory('Add')->manager($full_name);
+            $add = Model::factory('Add')
+                ->manager($full_name);
             $mang = Model::factory('select')
                 ->manager();
             $res = View::factory('result/manager')
