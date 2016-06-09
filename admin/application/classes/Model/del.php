@@ -38,4 +38,11 @@ class Model_Del extends Model
             ->execute();
     }
 
+    public function topics($id)
+    {
+        DB::delete('possible_topics')
+            ->where('id_theme', '=', $id)
+            ->execute();
+    }
+
 }

@@ -12,9 +12,8 @@ class Controller_Auth extends Controller {
 			if (isset($res)) {
 				$content = View::factory('global/auth')
 					->bind('res', $res);
+				setcookie("username", $res['0']['full_name']);
 				$this->response->body($content);
-				session_start();
-				$_SESSION['username'] = $res['0']['full_name'];
 			} else {
 				$content = View::factory('global/auth')
 					->bind('res', 'Ошибка');

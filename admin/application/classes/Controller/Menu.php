@@ -31,7 +31,10 @@ class Controller_Menu extends Controller_Template {
 
     public function action_report() // Отчеты
     {   
-        $content = View::factory('menu/report');
+        $report = Model::factory('select')
+            ->manager();
+        $content = View::factory('menu/report')
+            ->bind('report', $report);;
         $this->template->styles = array('style','menu/report');
         $this->template->title = 'Отчеты';
         $this->template->content = $content;
@@ -88,30 +91,6 @@ class Controller_Menu extends Controller_Template {
             ->bind('manager', $manager);
         $this->template->styles = array('style','menu/project');
         $this->template->title = 'Проекты';
-        $this->template->content = $content;
-    }
-
-    public function action_index()
-    {
-        
-        $this->template->styles = array('home');
-        $specialty = Model::factory('select')
-            ->specialty();
-        
-        $view = Model::factory('select')
-            ->view();
-        $group = Model::factory('select')
-            ->group();
-        $manager = Model::factory('select')
-            ->manager();
-        $res = View::factory('filter') ->bind('variable', $variable); 
-        $content = View::factory('home')
-            ->bind('res', $res)
-            ->bind('group', $group)
-            ->bind('manager', $manager)
-            ->bind('view', $view)
-            ->bind('specialty', $specialty);
-        $this->template->title = 'Учет Проектов Конструкторского Бюро';
         $this->template->content = $content;
     }
 

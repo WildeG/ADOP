@@ -78,4 +78,20 @@ class Controller_Insert extends Controller {
         }
     }
 
+    public function action_topics()
+    {
+        if ($_POST) {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $view = $_POST['view'];
+            $add = Model::factory('Add')
+                ->topics($title, $description, $view);
+            $topics = Model::factory('select')
+                ->topics();
+            $res = View::factory('result/topics')
+                ->bind('topics', $topics);
+            $this->response->body($res);
+        }
+    }
+
 }

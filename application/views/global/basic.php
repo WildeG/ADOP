@@ -24,16 +24,15 @@
 				<a class="navbar-brand" href="<?php echo URL::base(); ?>"><?php echo $title; ?></a>
 			</div>
 			<div id='auth' class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" name='logform' role="form">
-					<div class="form-group">
-						<input name="login" id="login" type="text" placeholder="Логин" class="form-control">
-					</div>
-					<div class="form-group">
-						<input name="pass" id="pass" type="password" placeholder="Пароль" class="form-control">
-					</div>
-					<button id='log_btn' onclick="logs()" type="button" class="btn btn-info">Войти</button>
-					<a href="<?php echo URL::base(); ?>registration"><label class="btn btn-warning">Регистрация</label></a>
-				</form>
+				<?php if (!empty($_COOKIE['username'])) {
+				echo '<form class="navbar-form navbar-right" name="logform" role="form">
+	<div class="form-group">
+		<a href="/user" title="Личный кабинет"><h4 style="padding:0; margin: 7px 0 0 0"><span class="glyphicon glyphicon-user"></span>&nbsp'; print_r($_COOKIE); echo '</h4></a>
+	</div>
+</form>';
+			} else {
+				echo $logauth;
+				} ?>
 			</div>
 		</div>
 	</div>

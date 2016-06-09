@@ -38,4 +38,10 @@ class Model_Add extends Model
             ->execute();
     }
 
+    public function topics($title, $description, $view)
+    {
+        DB::insert('possible_topics', array('title', 'description', 'view'))
+            ->values(array($title, $description, $view))
+            ->execute();
+    }
 }

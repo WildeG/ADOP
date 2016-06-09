@@ -70,5 +70,17 @@ class Controller_Delete extends Controller {
         }
     }
 
-
+    public function action_topics()
+    {
+        if (isset($_POST)){
+            $id = $_POST['id'];
+            $add = Model::factory('del')
+                ->topics($id);
+            $topics = Model::factory('select')
+                ->topics();
+            $res = View::factory('result/topics')
+                ->bind('topics', $topics);
+            $this->response->body($res);
+        }
+    }
 }

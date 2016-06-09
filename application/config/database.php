@@ -18,10 +18,10 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'localhost',
-			'database'   => 'diplom',
-			'username'   => 'root',
-			'password'   => '',
+			'hostname'   => 'venera.lite-host.in',
+			'database'   => 'worldsco_Diplom',
+			'username'   => 'worldsco_root',
+			'password'   => 'root',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',

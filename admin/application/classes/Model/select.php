@@ -100,7 +100,8 @@ class Model_Select extends Model
         return DB::select()
             ->from("manager")
             ->order_by("full_name","ASC")
-            ->execute();
+            ->execute()
+            ->as_array();
     }
 
     public function topics()
