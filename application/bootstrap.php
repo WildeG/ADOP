@@ -148,7 +148,7 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
-Route::set('menu', '<action>', array('action' => 'specialties|registration|project|group|view_project|step_1|step_2'))
+Route::set('menu', '<action>', array('action' => 'specialties|registration|project|reg_project|view_project|account'))
 	->defaults(array(
 		'controller' => 'Menu',
 	));

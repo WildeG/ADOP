@@ -63,4 +63,30 @@ class Model_Select extends Model
             ->as_array();
     }
 
+    public function project_user($id)
+    {
+        $query = DB::select()
+            ->from("projects")
+            ->where('id_user', '=', $id)
+            ->join('view', 'INNER')
+            ->on('projects.view', '=', 'view.id_view') 
+            ->execute()
+            ->as_array();
+        return $query;
+    }
+
+    public function id_user($id)
+    {
+        return DB::select()
+            ->from("user")
+            ->where('id_user', '=', $id)
+            ->join('group', 'INNER')
+            ->on('user.id_group', '=', 'group.id_group')
+            ->join('specialty', 'INNER')
+            ->on('group.cipher', '=', 'specialty.cipher')
+            ->limit(1)
+            ->execute()
+            ->as_array();
+    }
+
 }

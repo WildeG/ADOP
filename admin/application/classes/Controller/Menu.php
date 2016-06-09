@@ -31,8 +31,13 @@ class Controller_Menu extends Controller_Template {
 
     public function action_report() // Отчеты
     {   
-        $report = Model::factory('select')
+        $mang = Model::factory('select')
             ->manager();
+        foreach ($mang as $value) {
+            // $report[$value['full_name']]=
+            $mang = Model::factory('select')
+                ->manager();
+        }
         $content = View::factory('menu/report')
             ->bind('report', $report);;
         $this->template->styles = array('style','menu/report');

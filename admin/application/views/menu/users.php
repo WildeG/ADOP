@@ -32,7 +32,7 @@
 		<div class="form-group col-sm-12 text-right">
 			<div class="btn-group">
 				<input type="reset" class="btn btn-default" value="Очистить форму">
-				<input type="button" onclick="add()" class="btn btn-primary" value="Зарегестрировать пользователя">
+				<input type="button" onclick="add()" class="btn btn-primary" value="Добавить пользователя">
 			</div>
 		</div>
 	</form>
@@ -74,6 +74,9 @@
 				<td style="vertical-align:middle;"><?php if ($item['active']==1) { echo "<span class='label label-success' style='padding:5px; font-size: 11px;'><span class='glyphicon glyphicon-ok'></span> Подтвержден</span>"; } else {echo "<span class='label label-default' style='padding:5px; font-size: 11px;'>Ожидание</	span>"; } ?></td> 
 					<td style="vertical-align:middle;">
 						<div class="btn-group" style="padding:0;">
+							<button onclick="info(<?php echo $item['id_user']; ?>)" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-warning btn-xs">
+								<span class="glyphicon glyphicon-pencil"></span> Изменить
+							</button>
 							<button onclick="del(<?php echo $item['id_user']; ?>)" class="delete btn btn-danger btn-xs">
 								<span class="glyphicon glyphicon-trash"></span> Удалить
 							</button>

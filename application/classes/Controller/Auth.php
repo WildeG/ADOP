@@ -12,7 +12,7 @@ class Controller_Auth extends Controller {
 			if (isset($res)) {
 				$content = View::factory('global/auth')
 					->bind('res', $res);
-				setcookie("username", $res['0']['full_name']);
+				// setcookie("username", $res['0']['full_name']);
 				$this->response->body($content);
 			} else {
 				$content = View::factory('global/auth')

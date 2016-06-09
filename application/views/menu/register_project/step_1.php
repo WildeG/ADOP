@@ -1,39 +1,43 @@
-<form class="form-horizontal">
-	<div class="container col-xs-8 col-md-offset-2">
-		<div class="form-group">
-			<label for="exampleInputFile">Заголовок:</label>
-			<input class="form-control" type="text" id="exampleInputFile">
-		</div>
-		<div class="form-group">
-			<label for="inputEmail" class="control-label">Описание:</label>
-			<textarea class="form-control" rows="3"></textarea>
-		</div>
-		<div class="form-group">
-			<label for="inputEmail" class="control-label">Руководитель:</label>
-			<select class="form-control">
-				<option></option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="inputEmail" class="control-label">Вид проекта:</label>
-			<select class="form-control">
-				<option></option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputFile">Выберите файл:</label>
-			<input type="file" id="btn btn-info" class="btn btn-default">
-		</div>
-		<div class="form-group">
-			<div class="col-xs-offset-4 col-xs-5">
-				<input type="submit" class="btn btn-primary" value="Добавить проект">
-				<input type="reset" class="btn btn-default" value="Очистить форму">
+<div class="container">
+	<form class="form-horizontal" role="form" method="POST" id="form_article">
+		<input type="text" class="form-control" id="title" placeholder="Название проекта" style="margin-bottom: 15px;">
+		<textarea id="discriptions" class="form-control" placeholder="Описание" style="margin-bottom: 15px;"></textarea>
+		<div class="form-group" style="padding:0;">
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="subject" placeholder="Предмет">
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="user" placeholder="Пользователь">
 			</div>
 		</div>
-	</div>
-</form>
-<script>
-$(document).on('ready', function() {
-    $("#file").fileinput({showCaption: false});
-});
-</script>
+		<div class="form-group" style="padding:0;">
+			<div class="col-sm-4">
+				<select class="form-control" id="manager">
+					<?php 
+					foreach ($manager as $value) {
+						echo "<option value='".$value['id_manager']."' >".$value['full_name']."</option>";
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<select class="form-control" id="view">
+					<?php 
+					foreach ($view as $value) {
+						echo "<option value='".$value['id_view']."' >".$value['view']."</option>";
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-sm-4">
+				<input type="file" class="form-control" id="document">
+			</div>
+		</div>
+		<div class="form-group text-right" style="padding:0 15px;">
+			<div class="btn-group">
+				<input type="reset" class="btn btn-default" value="Очистить форму">
+				<input type="button" onclick="add()" class="btn btn-primary" value="Зарегестрировать пользователя">
+			</div>
+		</div>
+	</form>
+</div>

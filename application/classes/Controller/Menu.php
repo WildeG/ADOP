@@ -26,26 +26,30 @@ class Controller_Menu extends Controller_Template {
         $this->template->content = $content;
     }
 
-    public function action_step_1() // Проекты
+    public function action_reg_project() // Регистрация проекта
     {
         $content = View::factory('menu/register_project/step_1');
         $this->template->title = 'Регистрация проекта';
         $this->template->content = $content;
     }
 
-    public function action_step_2() // Проекты
+    public function action_account() // Личный кабинет
     {
-        $content = View::factory('menu/register_project/step_2');
+        if (!empty($_GET)){
+            $id = $_GET['id'];
+            $project = Model::factory('select')
+                ->project_user($id);
+            // $progress = Model::factory('select')
+            //     ->progress($id);
+            $user = Model::factory('select')
+                ->id_user($id);
+            $res = View::factory('menu/page_user')
+                // ->bind('progress', $progress)
+                ->bind('project', $project)
+                ->bind('user', $user);
+        }
         $this->template->title = 'Регистрация проекта';
-        $this->template->content = $content;
-    }
-
-    public function action_group() // Группы
-    {
-        $content = View::factory('menu/group');
-        $this->template->styles = array('menu/group');
-        $this->template->title = 'Группы';
-        $this->template->content = $content;
+        $this->template->content = $res;
     }
 
     public function action_view_project() // Виды проектов

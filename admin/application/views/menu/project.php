@@ -39,7 +39,7 @@
 		<div class="form-group text-right" style="padding:0 15px;">
 			<div class="btn-group">
 				<input type="reset" class="btn btn-default" value="Очистить форму">
-				<input type="button" onclick="add()" class="btn btn-primary" value="Зарегестрировать пользователя">
+				<input type="button" onclick="add()" class="btn btn-primary" value="Добавить проект">
 			</div>
 		</div>
 	</form>
