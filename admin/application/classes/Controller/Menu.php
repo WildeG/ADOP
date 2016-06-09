@@ -105,8 +105,10 @@ class Controller_Menu extends Controller_Template {
             ->group();
         $specialty = Model::factory('select')
             ->specialty();
+        $scontent = View::factory('result/group')
+            ->bind('group', $group);
         $content = View::factory('menu/group')
-            ->bind('group', $group)
+            ->bind('content', $scontent)
             ->bind('specialty', $specialty);
         $this->template->styles = array('style','menu/group');
         $this->template->title = 'Группы';

@@ -30,7 +30,12 @@
 			<tr>
 				<td valign="bottom"><?php echo $item['cipher']?></td>
 				<td valign="center"><?php echo $item['title_spec']?></td>
-				<td valign="center"><button onclick="del(<?php echo $item['cipher']; ?>)" class="delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspУдалить</button></td>
+				<td valign="center">
+					<button class="btn btn-warning btn-xs">
+						<span class="glyphicon glyphicon-pencil"></span> Изменить
+					</button>
+					<button onclick="del(<?php echo $item['cipher']; ?>)" class="delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>&nbspУдалить</button>
+				</td>
 			</tr>
 			<?php endforeach; ?>
 			<?php else: ?>

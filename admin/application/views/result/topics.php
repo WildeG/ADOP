@@ -12,6 +12,9 @@
 			<td valign="bottom"><?php echo $item['title']?></td>
 			<td valign="center"><?php echo $item['description']?></td>
 			<td valign="center"><?php echo $item['view']?></td>
+				<button class="btn btn-warning btn-xs">
+					<span class="glyphicon glyphicon-pencil"></span> Изменить
+				</button>
 				<td valign="center"><button onclick="del(<?php echo $item['id_theme']; ?>)" class="delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span>Удалить</button></td>
 		</tr>
 		<?php endforeach; ?>

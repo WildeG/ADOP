@@ -1,15 +1,15 @@
-<form method="post" action="<?php echo URL::base(); ?>Auth/login" class="login">
-    <p>
-      <label for="login">Логин:</label>
-      <input type="text" name="username" id="login" placeholder="Логин">
-    </p>
-
-    <p>
-      <label for="password">Пароль:</label>
-      <input type="password" name="password" id="password" value="123456">
-    </p>
-
-    <p class="login-submit">
-      <button type="submit" class="login-button">Войти</button>
-    </p>
-  </form>
+<div class="container col-xs-4 col-md-offset-4" style="margin-top: 20%;">
+	<form method="post" action="<?php echo URL::base(); ?>Auth/login">
+        <div class="form-group">
+            <label for="login">Логин:</label>
+            <input type="text" name="username" class="form-control" id="login" placeholder="Логин">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="123456">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" style="float:right">Войти</button>
+        </div>
+    </form>
+</div>

@@ -17,11 +17,7 @@ class Controller_Basic extends Controller_Template {
 			if ($_POST['sdate'] != 'false') { $sdate = $_POST['sdate']; };
 			if ($_POST['podate'] != 'false') { $podate = $_POST['podate']; };
 		}
-		if (!empty($_COOKIE['username'])) {
-			$logauth = View::factory('/global/auth');
-		} else {
-			$logauth = View::factory('/global/login');
-		}
+		$logauth = View::factory('global/login');
 		$this->template->styles = array('home');
 		$specialty = Model::factory('select')
 			->specialty();

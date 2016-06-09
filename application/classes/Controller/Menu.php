@@ -21,14 +21,24 @@ class Controller_Menu extends Controller_Template {
             ->group();
         $content = View::factory('menu/registration')
             ->bind('group', $group);
+        $logauth = View::factory('global/login');
         $this->template->styles = array('menu/registration');
         $this->template->title = 'Регистрация';
+        $this->template->logauth = $logauth;
         $this->template->content = $content;
     }
 
     public function action_reg_project() // Регистрация проекта
     {
-        $content = View::factory('menu/register_project/step_1');
+        $manager = Model::factory('select')
+            ->manager();
+        $logauth = View::factory('global/auth');
+        $view = Model::factory('select')
+            ->view();
+        $content = View::factory('menu/register_project/step_1')
+            ->bind('view', $view)
+            ->bind('manager', $manager);
+        $this->template->logauth = $logauth;
         $this->template->title = 'Регистрация проекта';
         $this->template->content = $content;
     }
@@ -48,7 +58,9 @@ class Controller_Menu extends Controller_Template {
                 ->bind('project', $project)
                 ->bind('user', $user);
         }
+        $logauth = View::factory('global/auth');
         $this->template->title = 'Регистрация проекта';
+        $this->template->logauth = $logauth;
         $this->template->content = $res;
     }
 
