@@ -1,6 +1,3 @@
-
-
-
 <div class="form-group">
 	<div class="col-xs-11">
 		<input type="text" class="form-control" id="search" name="search" placeholder="Название проекта">
