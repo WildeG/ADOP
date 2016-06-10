@@ -45,8 +45,8 @@ function add() {
 			year:year,
 			spec:spec },
 		dataType: "html",
-		beforesend: function () {
-			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		beforesend: function() {
+			$("#res").html("<center><img src='/public/image/system/load.gif' style='margin:50px;' /></center>");
 		},
 		success: function(data) {
 			$("#res").html(data);
@@ -59,8 +59,8 @@ function del(id) {
 		url: "/Delete/group",
 		data: {	id:id },
 		dataType: "html",
-		beforesend: function () {
-			$("#res").html("<center><img src='<?php echo URL::base(); ?>public/image/system/load.gif' style='margin:50px;' /></center>");
+		beforesend: function() {
+			$("#res").html("<center><img src='/public/image/system/load.gif' style='margin:50px;' /></center>");
 		},
 		success: function(data) {
 			$("#res").html(data);

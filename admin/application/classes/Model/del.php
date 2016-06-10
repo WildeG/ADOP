@@ -17,6 +17,13 @@ class Model_Del extends Model
             ->execute();
     }
 
+    public function project($id)
+    {
+        DB::delete('projects')
+            ->where('id_projects', '=', $id)
+            ->execute();
+    }
+
     public function specialties($id)
     {
         DB::delete('specialty')

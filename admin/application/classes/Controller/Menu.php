@@ -82,6 +82,8 @@ class Controller_Menu extends Controller_Template {
             ->specialty();
         $group = Model::factory('select')
             ->group();
+        $user = Model::factory('select')
+            ->user();
         $manager = Model::factory('select')
             ->manager();
         $view = Model::factory('select')
@@ -90,6 +92,7 @@ class Controller_Menu extends Controller_Template {
             ->bind('variable', $variable); 
         $content = View::factory('menu/project')
             ->bind('res', $res)
+            ->bind('user', $user)
             ->bind('view', $view)
             ->bind('group', $group)
             ->bind('specialty', $specialty)

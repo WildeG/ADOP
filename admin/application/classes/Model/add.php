@@ -10,6 +10,13 @@ class Model_Add extends Model
             ->execute();
     }
 
+    public function project($title, $discription, $subject, $user, $manager, $view)
+    {
+        DB::insert('projects', array('title', 'description', 'subject', 'id_user', 'manager', 'view'))
+            ->values(array($title, $discription, $subject, $user, $manager, $view))
+            ->execute();
+    }
+
     public function view_project($view)
     {
         DB::insert('view', array('view'))

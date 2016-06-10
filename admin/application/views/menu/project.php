@@ -4,13 +4,19 @@
 <div class="container">
 	<form class="form-horizontal" role="form" method="POST" id="form_article">
 		<input type="text" class="form-control" id="title" placeholder="Название проекта" style="margin-bottom: 15px;">
-		<textarea id="discriptions" class="form-control" placeholder="Описание" style="margin-bottom: 15px;"></textarea>
+		<textarea id="discription" class="form-control" placeholder="Описание" style="margin-bottom: 15px;"></textarea>
 		<div class="form-group" style="padding:0;">
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="subject" placeholder="Предмет">
 			</div>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="user" placeholder="Пользователь">
+				<select class="form-control" id="user">
+					<?php 
+					foreach ($user as $value) {
+						echo "<option value='".$value['id_user']."' >".$value['full_name']."</option>";
+					}
+					?>
+				</select>
 			</div>
 		</div>
 		<div class="form-group" style="padding:0;">
@@ -146,6 +152,45 @@
 </div>
 
 <script type="text/javascript">
+function add() {
+	var title = document.getElementById('title').value,
+		discription = document.getElementById('discription').value,
+		subject = document.getElementById('subject').value,
+		user = document.getElementById('user').value,
+		manager = document.getElementById('manager').value,
+		view = document.getElementById('view').value;
+	$.ajax({
+		type: "POST",
+		url: "/Insert/project",
+		data: {	title:title,
+			discription:discription,
+			subject:subject,
+			user:user,
+			manager:manager,
+			view:view },
+		dataType: "html",
+		beforesend: function() {
+			$("#res").html("<center><img src='/public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	}); 
+};
+function del(id) {
+	$.ajax({
+		type: "POST",
+		url: "/Delete/project",
+		data: {	id:id },
+		dataType: "html",
+		beforesend: function() {
+			$("#res").html("<center><img src='/public/image/system/load.gif' style='margin:50px;' /></center>");
+		},
+		success: function(data) {
+			$("#res").html(data);
+		}
+	});
+};
 function search() {
 	var search = document.getElementById('search').value;
 	$.ajax({

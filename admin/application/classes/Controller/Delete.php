@@ -28,6 +28,19 @@ class Controller_Delete extends Controller {
         }
     }
 
+    public function action_project()
+    {
+        if ($_POST['id']){
+            $id = $_POST['id'];
+            $add = Model::factory('del')->project($id);
+            $project = Model::factory('select')
+                ->project();
+            $res = View::factory('result/project')
+                ->bind('variable', $project);
+            $this->response->body($res);
+        }
+    }
+
     public function action_specialties()
     {
         if (isset($_POST)){

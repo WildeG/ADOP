@@ -16,6 +16,25 @@ class Controller_Insert extends Controller {
         }
 	}
 
+    public function action_project()
+    {
+        if ($_POST){
+            $title = $_POST['title'];
+            $discription = $_POST['discription'];
+            $subject = $_POST['subject'];
+            $user = $_POST['user'];
+            $manager = $_POST['manager'];
+            $view = $_POST['view'];
+            $add = Model::factory('add')
+                ->project($title, $discription, $subject, $user, $manager, $view);
+            $project = Model::factory('select')
+                ->project();
+            $res = View::factory('result/project')
+                ->bind('variable', $project);
+            $this->response->body($res);
+        }
+    }
+
     public function action_user()
     {
         if (!empty($_POST)){

@@ -32,6 +32,20 @@ class Model_Select extends Model
             ->execute();
     }
 
+    public function project()
+    {
+        return DB::select()
+            ->from("projects")
+            ->order_by("date_add","DESC")
+            ->join('view', 'INNER')
+            ->on('projects.view', '=', 'view.id_view') 
+            ->join('user', 'INNER')
+            ->on('projects.id_user', '=', 'user.id_user')
+            ->join('group', 'INNER')
+            ->on('user.id_group', '=', 'group.id_group')
+            ->execute();
+    }
+
     public function user()
     {
         return DB::select()
