@@ -31,12 +31,18 @@ class Controller_Menu extends Controller_Template {
 
     public function action_report() // Отчеты
     {   
-        $mang = Model::factory('select')
-            ->manager();
-        foreach ($mang as $value) {
-            // $report[$value['full_name']]=
-            $mang = Model::factory('select')
-                ->manager();
+        $res = Model::factory('select')
+            ->report_man();
+        foreach ($res as $value) {
+            $res1 = Model::factory('select')
+                ->report_user($value['manager']);
+            foreach ($res1 as $value2) {
+                $res2 = Model::factory('select')
+                    ->report_project($value2['id_user']);
+                foreach ($res2 as $value3) {
+                    $report[$value['full_name']][$value2['full_name']][$value3['view']] = $value3['count'];
+                }
+            }
         }
         $content = View::factory('menu/report')
             ->bind('report', $report);;

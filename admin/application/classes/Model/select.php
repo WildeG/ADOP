@@ -109,10 +109,51 @@ class Model_Select extends Model
             ->execute();
     }
 
+    public function report_man()
+    {
+        return DB::select('manager.full_name', 'manager')
+            ->from("projects")
+            ->join('manager', 'INNER')
+            ->on('projects.manager', '=', 'manager.id_manager')
+            ->group_by('full_name')
+            ->order_by("full_name","ASC")
+            ->execute()
+            ->as_array();
+    }
+
+    public function report_user($manager)
+    {
+        return DB::select('user.full_name', 'projects.id_user')
+            ->from("projects")
+            ->join('user', 'INNER')
+            ->on('projects.id_user', '=', 'user.id_user')
+            ->group_by('full_name')
+            ->where('manager', '=', $manager)
+            ->order_by("full_name","ASC")
+            ->execute()
+            ->as_array();
+    }
+
+    public function report_project($user)
+    {
+        return DB::select('view.view', array(DB::expr('COUNT(id_projects)'), 'count'))
+            ->from("projects")
+            ->join('view', 'INNER')
+            ->on('projects.view', '=', 'view.id_view')
+            ->group_by('view')
+            ->where('projects.id_user', '=', $user)
+            ->order_by("view.view","ASC")
+            ->execute()
+            ->as_array();
+    }
+
     public function manager()
     {
-        return DB::select()
+        return DB::select('id_manager', array(DB::expr('COUNT(id_projects)'), 'count'), 'full_name')
             ->from("manager")
+            ->join('projects', 'INNER')
+            ->on('projects.manager', '=', 'manager.id_manager')
+            ->group_by('full_name')
             ->order_by("full_name","ASC")
             ->execute()
             ->as_array();

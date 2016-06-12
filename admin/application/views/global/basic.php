@@ -7,7 +7,11 @@
 
 <link href="public/css/bootstrap.min.css" rel="stylesheet">
 
- 
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="public/css/bootstrap-select.min.css">
+
+
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
 <?php if (isset($styles)) { foreach($styles as $style): ?>
@@ -48,4 +52,9 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="public/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="public/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="public/js/i18n/defaults-ru_RU.min.js"></script>
 </html>

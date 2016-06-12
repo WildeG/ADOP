@@ -9,8 +9,8 @@
 			<div class="col-sm-6">
 				<input type="text" class="form-control" id="subject" placeholder="Предмет">
 			</div>
-			<div class="col-sm-6">
-				<select class="form-control" id="user">
+			<div class="col-sm-6" style="padding:0">
+				<select class="selectpicker col-sm-12" data-live-search="true" id="user">
 					<?php 
 					foreach ($user as $value) {
 						echo "<option value='".$value['id_user']."' >".$value['full_name']."</option>";
