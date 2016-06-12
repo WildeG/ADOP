@@ -147,13 +147,19 @@ class Model_Select extends Model
             ->as_array();
     }
 
+    public function count_projects($manager)
+    {
+        return DB::select(array(DB::expr('COUNT(id_projects)'), 'count'))
+            ->from("projects")
+            ->where('manager', '=', $manager)
+            ->execute()
+            ->as_array();
+    }
+
     public function manager()
     {
-        return DB::select('id_manager', array(DB::expr('COUNT(id_projects)'), 'count'), 'full_name')
+        return DB::select()
             ->from("manager")
-            ->join('projects', 'INNER')
-            ->on('projects.manager', '=', 'manager.id_manager')
-            ->group_by('full_name')
             ->order_by("full_name","ASC")
             ->execute()
             ->as_array();

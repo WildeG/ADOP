@@ -53,10 +53,17 @@ class Controller_Menu extends Controller_Template {
 
     public function action_manager() // Руководители
     {
-        $content = View::factory('menu/manager')
-            ->bind('mang', $mang);
         $mang = Model::factory('select')
             ->manager();
+        foreach ($mang as $value) {
+            $res[$value['id_manager']]['id_manager'] = $value['id_manager'];
+            $res[$value['id_manager']]['full_name'] = $value['full_name'];
+            $pro= Model::factory('select')
+                ->count_projects($value['id_manager']);
+            $res[$value['id_manager']]['count'] = $pro[0]['count'];
+        }
+        $content = View::factory('menu/manager')
+            ->bind('mang', $res);
         $this->template->styles = array('style','menu/manager');
         $this->template->title = 'Руководители';
         $this->template->content = $content;
