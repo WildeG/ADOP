@@ -91,9 +91,16 @@ class Controller_Insert extends Controller {
                 ->manager($full_name);
             $mang = Model::factory('select')
                 ->manager();
-            $res = View::factory('result/manager')
-                ->bind('mang', $mang);
-            $this->response->body($res);
+            foreach ($mang as $value) {
+                $res[$value['id_manager']]['id_manager'] = $value['id_manager'];
+                $res[$value['id_manager']]['full_name'] = $value['full_name'];
+                $pro= Model::factory('select')
+                    ->count_projects($value['id_manager']);
+                $res[$value['id_manager']]['count'] = $pro[0]['count'];
+            }
+            $res1 = View::factory('result/manager')
+                ->bind('mang', $res);
+            $this->response->body($res1);
         }
     }
 
