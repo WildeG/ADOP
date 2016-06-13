@@ -1,4 +1,3 @@
-<p id="error" style="display:none; padding: 10px 20px; margin-left: 10px;" class="bg-danger bg-rounded col-sm-12"></p>
 <h1>Руководители</h1>
 <h2><small>Добавить руководителя</small></h2>
 <div class="container">
@@ -13,6 +12,7 @@
 		</div>
 	</form>
 </div>
+<p id="error" style="display:none; padding: 10px 20px; margin-left: 10px;" class="bg-success bg-rounded col-sm-12"></p>
 <h2><small>Список руководителей</small></h2>
 <div class="container" id="res">
 	<table class="table table-striped">
@@ -56,6 +56,8 @@ function add() {
 		success: function(data) {
 			$('#form_article').trigger('reset');
 			$("#res").html(data);
+			$("#error").html("Руководитель успешно добавлен!");
+			$("#error").fadeIn(100,function() { $("#error").fadeOut(3000); }); 
 		}
 	}); 
 };
