@@ -27,7 +27,7 @@
 		</div>
 	</form>
 </div>
-<h2><small>Список видов</small></h2>
+<h2><small>Список групп</small></h2>
 <div class="container" id="res">
 	<?php echo $content; ?>
 </div>

@@ -9,16 +9,10 @@ class Controller_Auth extends Controller {
 			if (!empty($_POST['pass'])) { $pass = md5(md5($_POST['pass'])); } else { $pass = "false"; };
 			$res = Model::factory('auth')
 				->auth($login, $pass);
-			if (isset($res)) {
-				$content = View::factory('global/auth')
-					->bind('res', $res);
-				// setcookie("username", $res['0']['full_name']);
-				$this->response->body($content);
-			} else {
-				$content = View::factory('global/auth')
-					->bind('res', 'Ошибка');
-				$this->response->body($content);
-			}
+			$content = View::factory('global/auth')
+				->bind('res', $res);
+			// setcookie("username", $res['0']['full_name']);
+			$this->response->body($content);
 		}
 	}
 

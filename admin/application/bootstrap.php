@@ -82,9 +82,9 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
+Kohana::$environment = Kohana::PRODUCTION;
 if (isset($_SERVER['KOHANA_ENV']))
 {
-	Kohana::$environment = Kohana::DEVELOPMENT;
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
 
@@ -128,10 +128,12 @@ Kohana::modules(array(
 	 'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
+
+spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
 
 /**
  * Cookie Salt
