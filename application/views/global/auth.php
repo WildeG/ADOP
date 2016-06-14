@@ -1,7 +1,7 @@
-<?php if (isset($res[0]['id_user'])) { ?>
+<?php if (isset($bg[0]['id_user'])) { ?>
 <form class="navbar-form navbar-right" name='logform' role="form">
 	<div class="form-group">
-		<a href="/account?id=<?php echo $res[0]['id_user']; ?>" title="Личный кабинет"><h4 style="padding:0; margin: 7px 0 0 0"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $res[0]['full_name']; ?></h4></a>
+		<a href="/account?id=<?php echo $bg[0]['id_user']; ?>" title="Личный кабинет"><h4 style="padding:0; margin: 7px 0 0 0"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $bg[0]['full_name']; ?></h4></a>
 	</div>
 </form>
 <?php } else { ?>
@@ -15,9 +15,4 @@
 	<button id='log_btn' onclick="logs()" type="button" class="btn btn-info">Войти</button>
 	<a href="<?php echo URL::base(); ?>registration"><label class="btn btn-warning">Регистрация</label></a>
 </form>
-<script>
-(function () {
-    alert('Ошибка входа');
- }());
-</script>
-<?php } ?>
+<?php if (isset($bg)) {echo $bg; }  } ?>
