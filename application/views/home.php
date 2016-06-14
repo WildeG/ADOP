@@ -72,11 +72,11 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 col-md-offset-8">Сортировать по:</label>
 		<div class="col-xs-4 col-md-offset-8">
-			<select class="form-control" name="sort">
-				<option>Номер</option>
-				<option>Дата добавления</option>
-				<option>ФИО</option>
-				<option>Предмет</option>
+			<select class="form-control" name="sort" id="sort">
+				<option value='Nomer'>Номер</option>
+				<option value='data_add'>Дата добавления</option>
+				<option value='FIO'>ФИО</option>
+				<option value='Subject'>Предмет</option>
 			</select>
 		</div>
 	</div>
@@ -94,6 +94,7 @@ function search() {
 	var manager = document.getElementById('manager').value;
 	var sdate = document.getElementById('sdate').value;
 	var podate = document.getElementById('podate').value;
+	var sort = document.getElementById('sort').value;
 	$.ajax({
 		type: "POST",
 		url: "/Select/filter",
@@ -104,7 +105,8 @@ function search() {
 				view:view,
 				manager:manager,
 				sdate:sdate,
-				podate:podate
+				podate:podate,
+				sort:sort
 				},
 		dataType: "html",
 		success: function(data) { // когда получаем ответ

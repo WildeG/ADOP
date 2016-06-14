@@ -6,7 +6,7 @@ class Controller_Basic extends Controller_Template {
 
 	public function action_index()
 	{
-		$search = $full_name = $spec = $group = $view = $manager = $sdate = $podate = "false";
+		$search = $full_name = $spec = $group = $view = $manager = $sdate = $podate = $sort = "false";
 		if ($_POST) {
 			if ($_POST['search'] != 'false') { $search = $_POST['search']; };
 			if ($_POST['full_name'] != 'false') { $full_name = $_POST['full_name']; };
@@ -16,13 +16,14 @@ class Controller_Basic extends Controller_Template {
 			if ($_POST['manager'] != 'false') { $manager = $_POST['manager']; };
 			if ($_POST['sdate'] != 'false') { $sdate = $_POST['sdate']; };
 			if ($_POST['podate'] != 'false') { $podate = $_POST['podate']; };
+			if ($_POST['sort'] != 'false') { $sort = $_POST['sort']; };
 		}
 		$logauth = View::factory('global/login');
 		$this->template->styles = array('home');
 		$specialty = Model::factory('select')
 			->specialty();
 		$variable = Model::factory('select')
-			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate);
+			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate, $sort);
 		$view = Model::factory('select')
 			->view();
 		$group = Model::factory('select')
