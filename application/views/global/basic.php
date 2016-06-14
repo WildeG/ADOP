@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="container">
-		<div class="row-fluid">
+		<div class="row-fluid" id="auth">
 			<?php echo $content; ?>
 		</div>
 	</div>
@@ -61,7 +61,10 @@ function logs() {
     	dataType: "html",
 		success: function(data) { // когда получаем ответ
 			// if(!data.error){ // Если ошибки нет, то удаляем строку
-				$("#auth").html(data);
+			$("#auth").html(data);
+    	},
+    	error: function() {
+    		alert('Ошибка авторизации');
     	}
   });
 };
