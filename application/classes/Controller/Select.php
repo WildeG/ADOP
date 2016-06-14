@@ -13,9 +13,10 @@ class Controller_Select extends Controller {
 			if (!empty($_POST['manager'])) { $manager = $_POST['manager']; } else { $manager = "false"; };
 			if (!empty($_POST['sdate'])) { $sdate = $_POST['sdate']; } else { $sdate = "false"; };
 			if (!empty($_POST['podate'])) { $podate = $_POST['podate']; } else { $podate = "false"; };
+			if (!empty($_POST['sort'])) { $sort = $_POST['sort']; } else { $sort = "Nomer"; };
 		}
 		$variable = Model::factory('select')
-			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate);
+			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate, $sort);
 		$res = View::factory('filter') ->bind('variable', $variable);
 		$this->response->body($res);
 	}

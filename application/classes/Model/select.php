@@ -3,7 +3,7 @@
 class Model_Select extends Model
 {
 
-    public function variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate)
+    public function variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate, $sort)
     {
         $query = DB::select()
             ->from("projects")
@@ -16,14 +16,17 @@ class Model_Select extends Model
         if ($manager != 'false') { $query = $query->and_where('id_manager', '=', $manager); };
         if ($sdate != 'false') { $query = $query->and_where('date_add', '>=', $sdate.'%'); };
         if ($podate != 'false') { $query = $query->and_where('date_add', '<=', $podate.'%'); };
-        $query = $query ->order_by("date_add","DESC")
-            ->join('view', 'INNER')
+        $query = $query->join('view', 'INNER')
             ->on('projects.view', '=', 'view.id_view')
             ->join('user', 'INNER')
             ->on('projects.id_user', '=', 'user.id_user')
             ->join('group', 'INNER')
-            ->on('user.id_group', '=', 'group.id_group')
-            ->execute();
+            ->on('user.id_group', '=', 'group.id_group');
+        if ($sort = 'date_add') { $query = $query ->order_by("date_add","DESC"); };
+        if ($sort = 'Nomer') { $query = $query ->order_by("id_projects","DESC"); };
+        if ($sort = 'FIO') { $query = $query ->order_by("full_name","DESC"); };
+        if ($sort = 'subject') { $query = $query ->order_by("subject","DESC"); };
+        $query = $query->execute();
         return $query;
     }
 
