@@ -122,15 +122,16 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'auth'       => MODPATH.'auth',       		// Basic authentication
+	// 'cache'      => MODPATH.'cache',      	// Caching with multiple backends
+	// 'codebench'  => MODPATH.'codebench',  	// Benchmarking tool
+	'database'   => MODPATH.'database',   		// Database access
+	// 'image'      => MODPATH.'image',      	// Image manipulation
+	// 'minion'     => MODPATH.'minion',     	// CLI Tasks
+	// 'orm'        => MODPATH.'orm',        	// Object Relationship Mapping
+	// 'unittest'   => MODPATH.'unittest',   	// Unit testing
+	// 'userguide'  => MODPATH.'userguide',  	// User guide and API documentation
+	'pagination' => MODPATH.'pagination', 		// Pagination
 	));
 
 spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
@@ -150,7 +151,13 @@ spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
  */
 if(Auth::instance()->logged_in())
 	{
-		Route::set('menu','<action>', array('action' => 'specialties|users|project|group|view_project|manager|topics|report'))
+		Route::set('users','users(/<page>)', array('page' => '[0-9]+'))
+			->defaults(array(
+				'action'     => 'users',
+				'controller' => 'Menu',
+			));
+
+		Route::set('menu','<action>', array('action' => 'specialties|project|group|view_project|manager|topics|report'))
 			->defaults(array(
 				'controller' => 'Menu',
 			));

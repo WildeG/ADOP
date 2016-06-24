@@ -1,9 +1,9 @@
-<?php if (isset($bg[0]['id_user'])) { ?>
-<form class="navbar-form navbar-right" name='logform' role="form">
-	<div class="form-group">
-		<a href="/account?id=<?php echo $bg[0]['id_user']; ?>" title="Личный кабинет"><h4 style="padding:0; margin: 7px 0 0 0"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $bg[0]['full_name']; ?></h4></a>
-	</div>
-</form>
+<?php if (isset($bg[0]['id_user']) || isset($_COOKIE["TestCookie"])) { ?>
+	<form class="navbar-form navbar-right" name='logform' role="form">
+		<div class="form-group">
+			<a href="/account?id=<?php echo $bg[0]['id_user']; ?>" title="Личный кабинет"><h4 style="padding:0; margin: 7px 0 0 0"><span class="glyphicon glyphicon-user"></span>&nbsp<?php echo $bg[0]['full_name']; ?></h4></a>
+		</div>
+	</form>
 <?php } else { ?>
 <form class="navbar-form navbar-right" name='logform' role="form">
 	<div class="form-group">

@@ -46,7 +46,7 @@ class Model_Select extends Model
             ->execute();
     }
 
-    public function user()
+    public function user($offset, $quantity)
     {
         return DB::select()
             ->from("user")
@@ -54,6 +54,8 @@ class Model_Select extends Model
             ->on('user.id_group', '=', 'group.id_group')
             ->join('specialty', 'INNER')
             ->on('group.cipher', '=', 'specialty.cipher')
+            ->limit($quantity)
+            ->offset($offset)
             ->order_by("full_name","ASC")
             ->execute();
     }
@@ -191,5 +193,13 @@ class Model_Select extends Model
             ->on('group.cipher', '=', 'specialty.cipher')
             ->order_by("id_group","DESC")
             ->execute();
+    }
+
+    public function count($table)
+    {
+        return DB::select(array(DB::expr('COUNT(*)'), 'count'))
+            ->from($table)
+            ->execute()
+            ->as_array();
     }
 }

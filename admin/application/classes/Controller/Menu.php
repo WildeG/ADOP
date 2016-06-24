@@ -17,12 +17,19 @@ class Controller_Menu extends Controller_Template {
 
     public function action_users() // Пользователи
     {   
+        $count_m = Model::factory('select')
+            ->count('user');
+        $total_items = $count_m[0]['count'];
+        $pagination = Pagination::factory(array('total_items' => $total_items));
+        $offset = $pagination->offset;
+        $quantity = $pagination->items_per_page;
         $group = Model::factory('select')
             ->group();
         $user = Model::factory('select')
-            ->user();
+            ->user($offset, $quantity);
         $content = View::factory('menu/users')
             ->bind('user', $user)
+            ->bind('pagination', $pagination)
             ->bind('group', $group);
         $this->template->styles = array('style','menu/users');
         $this->template->title = 'Пользователи';
