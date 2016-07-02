@@ -18,7 +18,12 @@ class Controller_Basic extends Controller_Template {
 			if ($_POST['podate'] != 'false') { $podate = $_POST['podate']; };
 			if ($_POST['sort'] != 'false') { $sort = $_POST['sort']; };
 		}
-		$logauth = View::factory('global/login');
+		$session = Session::instance();
+		$user = $session->get('username');
+		$id_user = $session->get('id_user');
+		$logauth = View::factory('global/auth') 
+			->bind('user', $user) 
+			->bind('id_user', $id_user);
 		$this->template->styles = array('home');
 		$specialty = Model::factory('select')
 			->specialty();
