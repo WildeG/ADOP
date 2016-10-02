@@ -128,7 +128,7 @@ Kohana::modules(array(
 	'database'   => MODPATH.'database',   		// Database access
 	// 'image'      => MODPATH.'image',      	// Image manipulation
 	// 'minion'     => MODPATH.'minion',     	// CLI Tasks
-	// 'orm'        => MODPATH.'orm',        	// Object Relationship Mapping
+	'orm'        => MODPATH.'orm',        	// Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   	// Unit testing
 	// 'userguide'  => MODPATH.'userguide',  	// User guide and API documentation
 	'pagination' => MODPATH.'pagination', 		// Pagination
@@ -166,6 +166,11 @@ if(Auth::instance()->logged_in())
 			->defaults(array(
 				'controller' => 'Auth',
 				'action' => 'exit',
+			));
+		Route::set('registration','<action>')
+			->defaults(array(
+				'controller' => 'Auth',
+				'action' => 'registration',
 			));
 	}
 
