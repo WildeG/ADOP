@@ -38,7 +38,7 @@ class Controller_Auth extends Controller_Template {
                 $user->add('roles',ORM::factory('role',array('name'=>'login')));
      
                 // Отправляем письмо пользователю с логином и паролем
-                // mail($post['email'],'Регистрация на сайте','Вы были зерегестрированы на сайте, ваш логин: '.$post['username'].' Ваш пароль: '.$post['password']);
+                mail($post['email'],'Регистрация на сайте','Вы были зерегестрированы на сайте, ваш логин: '.$post['username'].' Ваш пароль: '.$post['password']);
                
                 // Делаем редирект на страницу авторизации
                 $this->redirect('http://diplom.loc/');
