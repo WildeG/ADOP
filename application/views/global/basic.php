@@ -63,7 +63,7 @@ function logs() {
 			$("#auth").html(data);
     	},
     	error: function() {
-    		alert('Ошибка отправки данных');
+    		alert('Запрос не прошел');
     	}
   });
 };

@@ -12,7 +12,7 @@ class Model_Auth extends Model
             ->and_where('password', '=', $pass)
             ->and_where('active', '!=', '0')
             ->execute()
-            ->as_assoc();
+            ->as_array();
         }
     }
 }

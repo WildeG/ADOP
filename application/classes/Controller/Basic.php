@@ -35,13 +35,15 @@ class Controller_Basic extends Controller_Template {
 			->group();
 		$manager = Model::factory('select')
             ->manager();
-        $res = View::factory('filter') ->bind('variable', $variable); 
+        $res = View::factory('filter') ->bind('variable', $variable);
+        $username = $session->get('username');
 		$content = View::factory('home')
 			->bind('res', $res)
 			->bind('group', $group)
 			->bind('manager', $manager)
 			->bind('view', $view)
-			->bind('specialty', $specialty);
+			->bind('specialty', $specialty)
+			->bind('username', $username);
 		$this->template->title = 'Учет Проектов Конструкторского Бюро';
 		$this->template->logauth = $logauth;
 		$this->template->content = $content;
