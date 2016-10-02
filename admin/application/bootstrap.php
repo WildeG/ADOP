@@ -167,12 +167,7 @@ if(Auth::instance()->logged_in())
 				'controller' => 'Auth',
 				'action' => 'exit',
 			));
-		Route::set('registration','<action>')
-			->defaults(array(
-				'controller' => 'Auth',
-				'action' => 'registration',
-			));
-	}
+	}		
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(
