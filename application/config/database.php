@@ -20,8 +20,8 @@ return array
 			 */
 			'hostname'   => 'venera.lite-host.in',
 			'database'   => 'worldsco_Diplom',
-			'username'   => 'worldsco_root',
-			'password'   => 'root',
+			'username'   => 'worldsco_adop',
+			'password'   => '0Zpfa7X8',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
