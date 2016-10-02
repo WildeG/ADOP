@@ -8,6 +8,7 @@ class Controller_Auth extends Controller_Template {
     {
         $login = Arr::get($_POST, 'username');
         $password = Arr::get($_POST, 'password');
+        unset($errors);
         if (Auth::instance()->login($login, $password)) {
             $this->redirect('http://diplom.loc/');
         } else {
@@ -31,7 +32,7 @@ class Controller_Auth extends Controller_Template {
         {
             try {
                 // Сохраняем пользователя в БД
-                $user = ORM::factory('user')->create_user($_POST, array('username','email','password'));
+                $user = ORM::factory('user')->create_user($_POST, array('username','full_name','email','password'));
      
                 // Выставляем ему роль, роль login означает что пользователь может авторизоваться
                 $user->add('roles',ORM::factory('role',array('name'=>'login')));

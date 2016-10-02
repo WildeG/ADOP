@@ -6,6 +6,12 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="email" class="col-xs-3 control-label">Полное имя:</label>
+		<div class="col-xs-5">
+			<input type="text" class="form-control" name="full_name" placeholder="Введите полное имя">
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="email" class="col-xs-3 control-label">Адрес email:</label>
 		<div class="col-xs-5">
 			<input type="text" class="form-control" name="email" placeholder="Введите email">
