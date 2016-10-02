@@ -1,4 +1,7 @@
 <div class="container col-xs-4 col-md-offset-4" style="margin-top: 20%;">
+    <?php if (isset($error)) {
+        echo "<div class='alert alert-danger'>".$error."</div>"; 
+    } ?>
 	<form method="post" action="<?php echo URL::base(); ?>Auth/login">
         <div class="form-group">
             <label for="login">Логин:</label>

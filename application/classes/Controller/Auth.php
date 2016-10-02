@@ -1,6 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Auth extends Controller {
+class Controller_Auth extends Controller_Template {
+
+    public $template = 'global/basic';
 
 	public function action_login() 
     {
@@ -9,8 +11,12 @@ class Controller_Auth extends Controller {
         if (Auth::instance()->login($login, $password)) {
             $this->redirect('http://diplom.loc/');
         } else {
-            echo 'failed';
+            $errors = "Ошибка авторизации. Неправильно введен логин или пароль";
         }
+        $this->template->styles = array('style');
+        $content = View::factory('login')->bind('error', $errors);
+        $this->template->title = 'Авторизация';
+        $this->template->content = $content;
     } 
 
     public function action_exit()
@@ -31,18 +37,19 @@ class Controller_Auth extends Controller {
                 $user->add('roles',ORM::factory('role',array('name'=>'login')));
      
                 // Отправляем письмо пользователю с логином и паролем
-                mail($post['email'],'Регистрация на сайте','Вы были зерегестрированы на сайте, ваш логин: '.$post['username'].' Ваш пароль: '.$post['password']);
+                // mail($post['email'],'Регистрация на сайте','Вы были зерегестрированы на сайте, ваш логин: '.$post['username'].' Ваш пароль: '.$post['password']);
                
                 // Делаем редирект на страницу авторизации
-                $this->redirect("/users/login");
-            } catch (ORM_Validtion_Exception $e) {
+                $this->redirect('http://diplom.loc/');
+            } catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('models');
-                // echo Debug::vars($errors);
             }
         }
      
         // Выводим шаблон регистрации
-        $this->template->content = View::factory('global/registrations');
+        $this->template->content = View::factory('global/registrations')->bind('error', $errors);
+        $this->template->styles = array('style');
+        $this->template->title = 'Регистрация';
     }
 
 } // End

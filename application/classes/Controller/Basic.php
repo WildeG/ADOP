@@ -12,9 +12,7 @@ class Controller_Basic extends Controller_Template {
 			$content = View::factory('home');
 			$this->template->title = 'Главная';
 		} else {
-			$this->template->styles = array('style');
-			$content = View::factory('login');
-			$this->template->title = 'Вход';
+			$this->redirect('http://diplom.loc/login');
 		}
 		$this->template->content = $content;
 	}
