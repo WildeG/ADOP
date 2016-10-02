@@ -8,6 +8,9 @@
             <label for="password">Пароль:</label>
             <input type="password" name="password" class="form-control" id="password" placeholder="123456">
         </div>
+         <div class="form-group">
+            <button type="button" class="btn btn-warning" style="float:left">Рестрация</button>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success" style="float:right">Войти</button>
         </div>
