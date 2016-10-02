@@ -6,46 +6,16 @@ class Controller_Basic extends Controller_Template {
 
 	public function action_index()
 	{
-		$search = $full_name = $spec = $group = $view = $manager = $sdate = $podate = $sort = "false";
-		if ($_POST) {
-			if ($_POST['search'] != 'false') { $search = $_POST['search']; };
-			if ($_POST['full_name'] != 'false') { $full_name = $_POST['full_name']; };
-			if ($_POST['spec'] != 'false') { $spec = $_POST['spec']; };
-			if ($_POST['group'] != 'false') { $group = $_POST['group']; };
-			if ($_POST['view'] != 'false') { $view = $_POST['view']; };
-			if ($_POST['manager'] != 'false') { $manager = $_POST['manager']; };
-			if ($_POST['sdate'] != 'false') { $sdate = $_POST['sdate']; };
-			if ($_POST['podate'] != 'false') { $podate = $_POST['podate']; };
-			if ($_POST['sort'] != 'false') { $sort = $_POST['sort']; };
+		if(Auth::instance()->logged_in())
+		{
+			$this->template->styles = array('style', 'home');
+			$content = View::factory('home');
+			$this->template->title = 'Главная';
+		} else {
+			$this->template->styles = array('style');
+			$content = View::factory('login');
+			$this->template->title = 'Вход';
 		}
-		$session = Session::instance();
-		$user = $session->get('username');
-		$id_user = $session->get('id_user');
-		$logauth = View::factory('global/auth') 
-			->bind('user', $user) 
-			->bind('id_user', $id_user);
-		$this->template->styles = array('home');
-		$specialty = Model::factory('select')
-			->specialty();
-		$variable = Model::factory('select')
-			->variable($search, $full_name, $spec, $group, $view, $manager, $sdate, $podate, $sort);
-		$view = Model::factory('select')
-			->view();
-		$group = Model::factory('select')
-			->group();
-		$manager = Model::factory('select')
-            ->manager();
-        $res = View::factory('filter') ->bind('variable', $variable);
-        $username = $session->get('username');
-		$content = View::factory('home')
-			->bind('res', $res)
-			->bind('group', $group)
-			->bind('manager', $manager)
-			->bind('view', $view)
-			->bind('specialty', $specialty)
-			->bind('username', $username);
-		$this->template->title = 'Учет Проектов Конструкторского Бюро';
-		$this->template->logauth = $logauth;
 		$this->template->content = $content;
 	}
 } 

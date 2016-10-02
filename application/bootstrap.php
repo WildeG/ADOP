@@ -82,9 +82,9 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
+Kohana::$environment = Kohana::PRODUCTION;
 if (isset($_SERVER['KOHANA_ENV']))
 {
-	Kohana::$environment = Kohana::DEVELOPMENT;
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
 
@@ -106,7 +106,6 @@ if (isset($_SERVER['KOHANA_ENV']))
 Kohana::init(array(
 	'base_url'   => '/',
 	'index_file' => FALSE
-	// 'errors' => FALSE
 ));
 
 /**
@@ -123,15 +122,16 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'auth'       => MODPATH.'auth',       		// Basic authentication
+	// 'cache'      => MODPATH.'cache',      	// Caching with multiple backends
+	// 'codebench'  => MODPATH.'codebench',  	// Benchmarking tool
+	'database'   => MODPATH.'database',   		// Database access
+	// 'image'      => MODPATH.'image',      	// Image manipulation
+	// 'minion'     => MODPATH.'minion',     	// CLI Tasks
+	// 'orm'        => MODPATH.'orm',        	// Object Relationship Mapping
+	// 'unittest'   => MODPATH.'unittest',   	// Unit testing
+	// 'userguide'  => MODPATH.'userguide',  	// User guide and API documentation
+	'pagination' => MODPATH.'pagination', 		// Pagination
 	));
 
 spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
@@ -149,11 +149,25 @@ spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+if(Auth::instance()->logged_in())
+	{
+		Route::set('users','users(/<page>)', array('page' => '[0-9]+'))
+			->defaults(array(
+				'action'     => 'users',
+				'controller' => 'Menu',
+			));
 
-Route::set('menu', '<action>', array('action' => 'specialties|registration|project|reg_project|view_project|account'))
-	->defaults(array(
-		'controller' => 'Menu',
-	));
+		Route::set('menu','<action>', array('action' => 'specialties|project|group|view_project|manager|topics|report'))
+			->defaults(array(
+				'controller' => 'Menu',
+			));
+
+		Route::set('exit','<action>')
+			->defaults(array(
+				'controller' => 'Auth',
+				'action' => 'exit',
+			));
+	}
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(

@@ -55,40 +55,33 @@ for ($i = $n7; $i <= $n8; $i++)
 }
 
 ?>
-<p class="pagination">
 
-	<?php if ($first_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($first_page)) ?>" rel="first"><?php echo __('First') ?></a>
-	<?php else: ?>
-		<?php echo __('First') ?>
-	<?php endif ?>
-
-	<?php if ($previous_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($previous_page)) ?>" rel="prev"><?php echo __('Previous') ?></a>
-	<?php else: ?>
-		<?php echo __('Previous') ?>
-	<?php endif ?>
-
-	<?php foreach ($links as $number => $content): ?>
-
-		<?php if ($number === $current_page): ?>
-			<strong><?php echo $content ?></strong>
-		<?php else: ?>
-			<a href="<?php echo HTML::chars($page->url($number)) ?>"><?php echo $content ?></a>
+<div class="pagination text-center col-sm-12">
+	<ul class="pagination">
+		<?php if ($first_page !== FALSE): ?>
+			<li><a href="<?php echo HTML::chars($page->url($first_page)) ?>" rel="first"><?php echo ('<<') ?></a></li>
 		<?php endif ?>
-
-	<?php endforeach ?>
-
-	<?php if ($next_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($next_page)) ?>" rel="next"><?php echo __('Next') ?></a>
-	<?php else: ?>
-		<?php echo __('Next') ?>
-	<?php endif ?>
-
-	<?php if ($last_page !== FALSE): ?>
-		<a href="<?php echo HTML::chars($page->url($last_page)) ?>" rel="last"><?php echo __('Last') ?></a>
-	<?php else: ?>
-		<?php echo __('Last') ?>
-	<?php endif ?>
-
-</p><!-- .pagination -->
+	
+		<?php if ($previous_page !== FALSE): ?>
+			<li><a href="<?php echo HTML::chars($page->url($previous_page)) ?>" rel="prev"><?php echo ('<') ?></a></li>
+		<?php endif ?>
+	
+		<?php foreach ($links as $number => $content): ?>
+	
+			<?php if ($number === $current_page): ?>
+				<li class="active"><a><strong><?php echo $content ?></strong></a></li>
+			<?php else: ?>
+				<li><a href="<?php echo HTML::chars($page->url($number)) ?>"><?php echo $content ?></a><li>
+			<?php endif ?>
+	
+		<?php endforeach ?>
+	
+		<?php if ($next_page !== FALSE): ?>
+			<li><a href="<?php echo HTML::chars($page->url($next_page)) ?>" rel="next"><?php echo ('>') ?></a></li>
+		<?php endif ?>
+	
+		<?php if ($last_page !== FALSE): ?>
+			<li><a href="<?php echo HTML::chars($page->url($last_page)) ?>" rel="last"><?php echo ('>>') ?></a></li>
+		<?php endif ?>
+	</ul>
+</div><!-- .pagination -->

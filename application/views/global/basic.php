@@ -5,8 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo $title; ?></title>
 
-<link href="public/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?php echo URL::base(); ?>public/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/public/css/bootstrap.min.css" rel="stylesheet">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/public/css/bootstrap-select.min.css">
+
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
@@ -20,20 +24,21 @@
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<?php echo URL::base(); ?>"><?php echo $title; ?></a>
+				<a class="navbar-brand" href="<?php echo URL::base(); ?>">Панель управления</a>
 			</div>
-			<div id='auth' class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" name="logform" role="form">
-	<div class="form-group">
-		<?php echo $logauth; ?>
-	</div>
-</form>
+			<?php if(Auth::instance()->logged_in()) { ?>
+			<div class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" role="form">
+					<a href="<?php echo URL::base(); ?>"><span class="glyphicon glyphicon-home" style="font-size:30px;letter-spacing:15px;"></span></a>
+					<a href="<?php echo URL::base(); ?>exit"><span class="glyphicon glyphicon-log-out" style="font-size:30px;letter-spacing:15px;"></span></a>
+				</form>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 
-	<div class="container">
-		<div class="row-fluid" id="auth">
+	<div class="container" style="padding-bottom: 40px;">
+		<div class="row-fluid">
 			<?php echo $content; ?>
 		</div>
 	</div>
@@ -46,25 +51,10 @@
 	
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="public/js/bootstrap.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="/public/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="/public/js/i18n/defaults-ru_RU.min.js"></script>
 </html>
-<script type="text/javascript">
-function logs() {
-	var login = document.getElementById('login').value;
-	var pass = document.getElementById('pass').value;
-  	$.ajax({
-    	type: "POST",
-   		url: "/Auth/auth",
-    	data: {login:login,
-    			pass:pass},
-    	dataType: "html",
-		success: function(data) { // когда получаем ответ
-			// if(!data.error){ // Если ошибки нет, то удаляем строку
-			$("#auth").html(data);
-    	},
-    	error: function() {
-    		alert('Запрос не прошел');
-    	}
-  });
-};
-</script>
